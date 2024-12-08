@@ -36,9 +36,8 @@ const DefaulHeader2 = () => {
             <div className="logo">
               <Link to="/">
                 <img
-                 
-                  src="/images/logo.svg"
-                  alt="brand"
+                  src="/images/logo-horizontal-transfer-market.svg"
+                  alt="the rugby transfer market logo"
                 />
               </Link>
             </div>
