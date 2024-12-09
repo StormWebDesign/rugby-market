@@ -4,8 +4,8 @@ import HomeComponent from "@/components/home-1";
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
-  title: "The Rugby Transfer Market",
-  description: "We need a good description here",
+  title: "Rugby Transfer Market",
+  description: "Superio - Job Borad ReactJs Template",
 };
 
 export default function Home() {
