@@ -29,7 +29,14 @@ const FormContent = ({ setSuccessMessage, setErrorMessage, userType }) => {
       });
 
       setSuccessMessage("Registration successful! Please check your email to verify your account.");
-      navigate("/my-profile");
+      navigate("/candidates-dashboard/my-profile");
+
+      // Redirect based on userType
+      if (userType === "Player") {
+        navigate("/candidates-dashboard/dashboard");
+      } else if (userType === "Club") {
+        navigate("/employers-dashboard/dashboard");
+      }
     } catch (err) {
       setErrorMessage(err.message);
     } finally {

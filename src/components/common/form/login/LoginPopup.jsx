@@ -1,7 +1,11 @@
+import { useState } from "react";
 import Register from "../register/Register";
 import FormContent from "./FormContent";
 
 const LoginPopup = () => {
+  const [successMessage, setSuccessMessage] = useState(""); // For success messages
+  const [errorMessage, setErrorMessage] = useState(""); // For error messages
+
   return (
     <>
       <div className="modal fade" id="loginPopupModal">
@@ -12,25 +16,20 @@ const LoginPopup = () => {
               className="closed-modal"
               data-bs-dismiss="modal"
             ></button>
-            {/* End close modal btn */}
 
             <div className="modal-body">
-              {/* <!-- Login modal --> */}
               <div id="login-modal">
-                {/* <!-- Login Form --> */}
                 <div className="login-form default-form">
-                  <FormContent />
+                  <FormContent
+                    setSuccessMessage={setSuccessMessage}
+                    setErrorMessage={setErrorMessage}
+                  />
                 </div>
-                {/* <!--End Login Form --> */}
               </div>
-              {/* <!-- End Login Module --> */}
             </div>
-            {/* En modal-body */}
           </div>
-          {/* End modal-content */}
         </div>
       </div>
-      {/* <!-- Login Popup Modal --> */}
 
       <div className="modal fade" id="registerModal">
         <div className="modal-dialog modal-lg modal-dialog-centered login-modal modal-dialog-scrollable">
@@ -40,25 +39,21 @@ const LoginPopup = () => {
               className="closed-modal"
               data-bs-dismiss="modal"
             ></button>
-            {/* End close modal btn */}
 
             <div className="modal-body">
-              {/* <!-- Login modal --> */}
               <div id="login-modal">
-                {/* <!-- Login Form --> */}
                 <div className="login-form default-form">
                   <Register />
                 </div>
-                {/* <!--End Login Form --> */}
               </div>
-              {/* <!-- End Login Module --> */}
             </div>
-            {/* En modal-body */}
           </div>
-          {/* End modal-content */}
         </div>
       </div>
-      {/* <!-- Login Popup Modal --> */}
+
+      {/* Display messages */}
+      {successMessage && <p className="success-message">{successMessage}</p>}
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
     </>
   );
 };

@@ -1,18 +1,70 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "@/firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { Link, useNavigate } from "react-router-dom";
 import LoginWithSocial from "./LoginWithSocial";
 
-const FormContent = () => {
+const FormContent = ({ setSuccessMessage, setErrorMessage }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setSuccessMessage("");
+    setErrorMessage("");
+
+    try {
+      // Log in with Firebase Authentication
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // Fetch user details from Firestore
+      const userDocRef = doc(db, "users", user.uid);
+      const userDoc = await getDoc(userDocRef);
+
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        console.log("User type:", userData.userType);
+
+        // Redirect based on userType
+        if (userData.userType === "Player") {
+          navigate("/candidates-dashboard/dashboard");
+        } else if (userData.userType === "Club") {
+          navigate("/employers-dashboard/dashboard");
+        } else {
+          setErrorMessage("User type is not recognized.");
+        }
+      } else {
+        setErrorMessage("User document does not exist.");
+      }
+    } catch (err) {
+      console.error("Login error:", err);
+      setErrorMessage(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="form-inner">
       <h3>Login to Transfer Market</h3>
 
-      {/* <!--Login Form--> */}
-      <form method="post">
+      <form onSubmit={handleLogin}>
         <div className="form-group">
-          <label>Username</label>
-          <input type="text" name="username" placeholder="Username" required />
+          <label>Email Address</label>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
         </div>
-        {/* name */}
 
         <div className="form-group">
           <label>Password</label>
@@ -20,38 +72,22 @@ const FormContent = () => {
             type="password"
             name="password"
             placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
-        {/* password */}
-
-        <div className="form-group">
-          <div className="field-outer">
-            <div className="input-group checkboxes square">
-              <input type="checkbox" name="remember-me" id="remember" />
-              <label htmlFor="remember" className="remember">
-                <span className="custom-checkbox"></span> Remember me
-              </label>
-            </div>
-            <a href="#" className="pwd">
-              Forgot password?
-            </a>
-          </div>
-        </div>
-        {/* forgot password */}
 
         <div className="form-group">
           <button
             className="theme-btn btn-style-one"
             type="submit"
-            name="log-in"
+            disabled={loading}
           >
-            Log In
+            {loading ? "Logging in..." : "Log In"}
           </button>
         </div>
-        {/* login */}
       </form>
-      {/* End form */}
 
       <div className="bottom-box">
         <div className="text">
@@ -72,7 +108,6 @@ const FormContent = () => {
 
         <LoginWithSocial />
       </div>
-      {/* End bottom-box LoginWithSocial */}
     </div>
   );
 };
