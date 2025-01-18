@@ -1,12 +1,13 @@
-
-
-
+import { useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import LoginWithSocial from "./LoginWithSocial";
 import Form from "./FormContent";
 import { Link } from "react-router-dom";
 
 const Register = () => {
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
   return (
     <div className="form-inner">
       <h3>Create a Free Account</h3>
@@ -27,19 +28,18 @@ const Register = () => {
             </Tab>
           </TabList>
         </div>
-        {/* End .form-group */}
 
         <TabPanel>
-          <Form />
+          <Form setSuccessMessage={setSuccessMessage} setErrorMessage={setErrorMessage} />
         </TabPanel>
-        {/* End cadidates Form */}
 
         <TabPanel>
-          <Form />
+          <Form setSuccessMessage={setSuccessMessage} setErrorMessage={setErrorMessage} />
         </TabPanel>
-        {/* End Employer Form */}
       </Tabs>
-      {/* End form-group */}
+
+      {successMessage && <div className="popup success">{successMessage}</div>}
+      {errorMessage && <div className="popup error">{errorMessage}</div>}
 
       <div className="bottom-box">
         <div className="text">
@@ -57,9 +57,8 @@ const Register = () => {
         <div className="divider">
           <span>or</span>
         </div>
-        <LoginWithSocial />
+        <LoginWithSocial setSuccessMessage={setSuccessMessage} setErrorMessage={setErrorMessage} />
       </div>
-      {/* End bottom-box LoginWithSocial */}
     </div>
   );
 };
