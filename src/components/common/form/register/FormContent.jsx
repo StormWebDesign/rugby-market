@@ -4,7 +4,7 @@ import { db, auth } from "@/firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
-const FormContent = ({ setSuccessMessage, setErrorMessage }) => {
+const FormContent = ({ setSuccessMessage, setErrorMessage, userType }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -20,23 +20,16 @@ const FormContent = ({ setSuccessMessage, setErrorMessage }) => {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      // Send a verification email
       await sendEmailVerification(user);
 
-      // Create a Firestore document for the user
       await setDoc(doc(db, "users", user.uid), {
         email: user.email,
+        userType,
         createdAt: new Date(),
       });
 
       setSuccessMessage("Registration successful! Please check your email to verify your account.");
-      
-      // Navigate to "My Profile" after the user verifies their email
-      user.reload().then(() => {
-        if (user.emailVerified) {
-          navigate("/my-profile"); // Adjust the route as needed for your app
-        }
-      });
+      navigate("/my-profile");
     } catch (err) {
       setErrorMessage(err.message);
     } finally {
@@ -71,9 +64,9 @@ const FormContent = ({ setSuccessMessage, setErrorMessage }) => {
         />
       </div>
       <div className="form-group">
-      <button className="theme-btn btn-style-one" type="submit" disabled={loading}>
-        {loading ? "Creating Account..." : "Create a Free Account"}
-      </button>
+        <button className="theme-btn btn-style-one" type="submit" disabled={loading}>
+          {loading ? "Creating Account..." : "Create a Free Account"}
+        </button>
       </div>
     </form>
   );

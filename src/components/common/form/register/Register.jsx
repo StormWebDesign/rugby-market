@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import LoginWithSocial from "./LoginWithSocial";
 import Form from "./FormContent";
+import LoginWithSocial from "./LoginWithSocial";
 import { Link } from "react-router-dom";
 
 const Register = () => {
-  const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState(""); // For success messages
+  const [errorMessage, setErrorMessage] = useState(""); // For error messages
+
+  const handleResetMessages = () => {
+    setSuccessMessage("");
+    setErrorMessage("");
+  };
 
   return (
     <div className="form-inner">
@@ -15,13 +20,12 @@ const Register = () => {
       <Tabs>
         <div className="form-group register-dual">
           <TabList className="btn-box row">
-            <Tab className="col-lg-6 col-md-12">
+            <Tab className="col-lg-6 col-md-12" onClick={handleResetMessages}>
               <button className="theme-btn btn-style-four">
                 <i className="la la-user"></i> Player
               </button>
             </Tab>
-
-            <Tab className="col-lg-6 col-md-12">
+            <Tab className="col-lg-6 col-md-12" onClick={handleResetMessages}>
               <button className="theme-btn btn-style-four">
                 <i className="la la-briefcase"></i> Club
               </button>
@@ -29,17 +33,26 @@ const Register = () => {
           </TabList>
         </div>
 
+        {/* Pass the state handlers as props */}
         <TabPanel>
-          <Form setSuccessMessage={setSuccessMessage} setErrorMessage={setErrorMessage} />
+          <Form
+            userType="Player"
+            setSuccessMessage={setSuccessMessage}
+            setErrorMessage={setErrorMessage}
+          />
         </TabPanel>
-
         <TabPanel>
-          <Form setSuccessMessage={setSuccessMessage} setErrorMessage={setErrorMessage} />
+          <Form
+            userType="Club"
+            setSuccessMessage={setSuccessMessage}
+            setErrorMessage={setErrorMessage}
+          />
         </TabPanel>
       </Tabs>
 
-      {successMessage && <div className="popup success">{successMessage}</div>}
-      {errorMessage && <div className="popup error">{errorMessage}</div>}
+      {/* Show any success or error messages */}
+      {successMessage && <p className="success-message">{successMessage}</p>}
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
 
       <div className="bottom-box">
         <div className="text">
@@ -57,7 +70,10 @@ const Register = () => {
         <div className="divider">
           <span>or</span>
         </div>
-        <LoginWithSocial setSuccessMessage={setSuccessMessage} setErrorMessage={setErrorMessage} />
+        <LoginWithSocial
+          setSuccessMessage={setSuccessMessage}
+          setErrorMessage={setErrorMessage}
+        />
       </div>
     </div>
   );
