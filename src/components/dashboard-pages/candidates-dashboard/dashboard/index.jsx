@@ -1,3 +1,7 @@
+import { useState, useEffect } from "react";
+import { auth, db } from "@/firebase"; // Import your Firebase config
+import { doc, getDoc } from "firebase/firestore";
+
 import MobileMenu from "../../../header/MobileMenu";
 import LoginPopup from "../../../common/form/login/LoginPopup";
 import DashboardCandidatesSidebar from "../../../header/DashboardCandidatesSidebar";
@@ -11,10 +15,56 @@ import DashboardCandidatesHeader from "../../../header/DashboardCandidatesHeader
 import MenuToggler from "../../MenuToggler";
 
 const Index = () => {
+  const [firstName, setFirstName] = useState("World"); // Default name
+  const [greeting, setGreeting] = useState("Hello"); // Default greeting
+
+  // Map of greetings for different languages
+  const greetingsMap = {
+    cy: "Helo", //Welsh
+    en: "Hello",
+    es: "Hola",
+    fr: "Bonjour",
+    de: "Hallo",
+    it: "Ciao",
+    ja: "こんにちは",
+    zh: "你好",
+    ko: "안녕하세요",
+    ru: "Здравствуйте",
+    hi: "नमस्ते",
+  };
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const user = auth.currentUser;
+        if (user) {
+          const userDocRef = doc(db, "users", user.uid);
+          const userDoc = await getDoc(userDocRef);
+
+          if (userDoc.exists()) {
+            const userData = userDoc.data();
+            if (userData.firstName) {
+              setFirstName(userData.firstName); // Set the firstName from Firestore
+            }
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+
+    // Detect user's browser language and set the appropriate greeting
+    const browserLanguage = navigator.language.slice(0, 2); // Get the language code (e.g., 'en')
+    const localizedGreeting = greetingsMap[browserLanguage] || "Hello"; // Fallback to "Hello"
+    setGreeting(localizedGreeting);
+  }, []);
+
   return (
     <div className="page-wrapper dashboard">
       <span className="header-span"></span>
-      {/* <!-- Header Span for hight --> */}
+      {/* <!-- Header Span for height --> */}
 
       <LoginPopup />
       {/* End Login Popup Modal */}
@@ -31,7 +81,7 @@ const Index = () => {
       {/* <!-- Dashboard --> */}
       <section className="user-dashboard">
         <div className="dashboard-outer">
-          <BreadCrumb title="Howdy, Jerome!!" />
+          <BreadCrumb title={`${greeting}, ${firstName}`} />
           {/* breadCrumb */}
 
           <MenuToggler />
@@ -82,7 +132,7 @@ const Index = () => {
             </div>
             {/* End .col */}
           </div>
-          {/* End .row profile and notificatins */}
+          {/* End .row profile and notifications */}
         </div>
         {/* End dashboard-outer */}
       </section>

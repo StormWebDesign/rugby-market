@@ -13,6 +13,7 @@ const DashboardCandidatesHeader = () => {
     const [navbar, setNavbar] = useState(false);
     const [userType, setUserType] = useState(null); // State for userType
     const [isLoggedIn, setIsLoggedIn] = useState(false); // State for login status
+    const [thumbnailImage, setThumbnailImage] = useState(null); // State to store thumbnailImage
 
     // Handle background change on scroll
     const changeBackground = () => {
@@ -37,6 +38,9 @@ const DashboardCandidatesHeader = () => {
                         const userData = userDoc.data();
                         if (userData.userType) {
                             setUserType(userData.userType); // Set the userType
+                        }
+                        if (userData.thumbnailImage) {
+                            setThumbnailImage(userData.thumbnailImage); // Set the thumbnailImage
                         }
                     }
                 }
@@ -115,7 +119,11 @@ const DashboardCandidatesHeader = () => {
                                 <img
                                     alt="avatar"
                                     className="thumb"
-                                    src="/images/resource/candidate-1.png"
+                                    src={
+                                        thumbnailImage
+                                            ? thumbnailImage // Use thumbnailImage if available
+                                            : "/images/resource/candidate-1.png" // Fallback image
+                                    }
                                 />
                                 <span className="name">My Account</span>
                             </a>

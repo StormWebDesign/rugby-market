@@ -5,7 +5,8 @@ import Select from "react-select";
 
 const FormInfoBox = () => {
   const [formData, setFormData] = useState({
-    fullName: "",
+    firstName: "",
+    lastName: "",
     phone: "",
     email: "",
     website: "",
@@ -138,27 +139,26 @@ const FormInfoBox = () => {
   return (
     <form onSubmit={handleSubmit} className="default-form">
       <div className="row">
-        {/* Full Name */}
+        {/* First Name */}
         <div className="form-group col-lg-6 col-md-12">
-          <label>Full Name</label>
+          <label>First Name</label>
           <input
             type="text"
-            name="fullName"
-            placeholder="Jerome"
-            value={formData.fullName}
+            name="firstName"
+            placeholder="Hello"
+            value={formData.firstName}
             onChange={handleInputChange}
             required
           />
         </div>
-
-        {/* Job Title */}
+        {/* Last Name */}
         <div className="form-group col-lg-6 col-md-12">
-          <label>Job Title</label>
+          <label>Last Name</label>
           <input
             type="text"
-            name="jobTitle"
-            placeholder="UI Designer"
-            value={formData.jobTitle}
+            name="lastName"
+            placeholder="World"
+            value={formData.lastName}
             onChange={handleInputChange}
             required
           />
