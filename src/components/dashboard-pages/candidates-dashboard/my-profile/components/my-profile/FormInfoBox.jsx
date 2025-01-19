@@ -1,163 +1,250 @@
-
-
-
+import { useState, useEffect } from "react";
+import { db, auth } from "@/firebase";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import Select from "react-select";
 
 const FormInfoBox = () => {
-  const catOptions = [
-    { value: "Banking", label: "Banking" },
-    { value: "Digital & Creative", label: "Digital & Creative" },
-    { value: "Retail", label: "Retail" },
-    { value: "Human Resources", label: "Human Resources" },
-    { value: "Managemnet", label: "Managemnet" },
-    { value: "Accounting & Finance", label: "Accounting & Finance" },
-    { value: "Digital", label: "Digital" },
-    { value: "Creative Art", label: "Creative Art" },
+  const [formData, setFormData] = useState({
+    fullName: "",
+    phone: "",
+    email: "",
+    website: "",
+    currentSalary: "",
+    expectedSalary: "",
+    experience: "",
+    dateOfBirth: "",
+    education: "",
+    languages: "",
+    positions: [],
+    rugbyType: [],
+    allowSearch: "Yes",
+    description: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isFetching, setIsFetching] = useState(true);
+
+  const catPositions = [
+    { value: "Loose-head prop", label: "Loose-head prop" },
+    { value: "Hooker", label: "Hooker" },
+    { value: "Tight-head prop", label: "Tight-head prop" },
+    { value: "Second-row", label: "Second-row" },
+    { value: "Blindside flanker", label: "Blindside flanker" },
+    { value: "Open side flanker", label: "Open side flanker" },
+    { value: "Number 8", label: "Number 8" },
+    { value: "Scrum-half", label: "Scrum-half" },
+    { value: "Fly-half", label: "Fly-half" },
+    { value: "Left wing", label: "Left wing" },
+    { value: "Inside centre", label: "Inside centre" },
+    { value: "Outside centre", label: "Outside centre" },
+    { value: "Right wing", label: "Right wing" },
+    { value: "Full-back", label: "Full-back" },
   ];
 
+  const catTypes = [
+    { value: "Rugby Union", label: "Rugby Union" },
+    { value: "Rugby League", label: "Rugby League" },
+    { value: "Rugby Sevens", label: "Rugby Sevens" },
+  ];
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const user = auth.currentUser;
+        if (!user) {
+          setErrorMessage("User is not logged in.");
+          return;
+        }
+
+        // Fetch user data from Firestore
+        const userDocRef = doc(db, "users", user.uid);
+        const userDoc = await getDoc(userDocRef);
+
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+          setFormData((prevData) => ({
+            ...prevData,
+            ...userData,
+            positions: userData.positions || [],
+            rugbyType: userData.rugbyType || [],
+          }));
+        } else {
+          console.error("No user data found in Firestore.");
+        }
+      } catch (err) {
+        console.error("Error fetching user data:", err);
+        setErrorMessage("Failed to fetch user data.");
+      } finally {
+        setIsFetching(false);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handlePositionChange = (selectedOptions) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      positions: selectedOptions.map((option) => option.value),
+    }));
+  };
+
+  const handleTypeChange = (selectedOptions) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      rugbyType: selectedOptions.map((option) => option.value),
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setSuccessMessage("");
+    setErrorMessage("");
+
+    try {
+      const user = auth.currentUser;
+      if (!user) {
+        setErrorMessage("User is not logged in.");
+        return;
+      }
+
+      // Save data to Firestore
+      const userDocRef = doc(db, "users", user.uid);
+      await updateDoc(userDocRef, {
+        ...formData,
+      });
+
+      setSuccessMessage("Profile updated successfully!");
+    } catch (err) {
+      console.error("Error updating profile:", err);
+      setErrorMessage("Failed to update profile. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (isFetching) {
+    return <p>Loading profile data...</p>;
+  }
+
   return (
-    <form action="#" className="default-form">
+    <form onSubmit={handleSubmit} className="default-form">
       <div className="row">
-        {/* <!-- Input --> */}
+        {/* Full Name */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Full Name</label>
-          <input type="text" name="name" placeholder="Jerome" required />
+          <input
+            type="text"
+            name="fullName"
+            placeholder="Jerome"
+            value={formData.fullName}
+            onChange={handleInputChange}
+            required
+          />
         </div>
 
-        {/* <!-- Input --> */}
+        {/* Job Title */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Job Title</label>
-          <input type="text" name="name" placeholder="UI Designer" required />
+          <input
+            type="text"
+            name="jobTitle"
+            placeholder="UI Designer"
+            value={formData.jobTitle}
+            onChange={handleInputChange}
+            required
+          />
         </div>
 
-        {/* <!-- Input --> */}
+        {/* Phone */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Phone</label>
           <input
             type="text"
-            name="name"
+            name="phone"
             placeholder="0 123 456 7890"
+            value={formData.phone}
+            onChange={handleInputChange}
             required
           />
         </div>
 
-        {/* <!-- Input --> */}
+        {/* Email */}
         <div className="form-group col-lg-6 col-md-12">
-          <label>Email address</label>
+          <label>Email Address</label>
           <input
-            type="text"
-            name="name"
-            placeholder="creativelayers"
+            type="email"
+            name="email"
+            placeholder="{formData.email}"
+            value={formData.email}
+            onChange={handleInputChange}
             required
           />
         </div>
 
-        {/* <!-- Input --> */}
+        {/* positions */}
         <div className="form-group col-lg-6 col-md-12">
-          <label>Website</label>
-          <input
-            type="text"
-            name="name"
-            placeholder="www.jerome.com"
-            required
-          />
-        </div>
-
-        {/* <!-- Input --> */}
-        <div className="form-group col-lg-3 col-md-12">
-          <label>Current Salary($)</label>
-          <select className="chosen-single form-select" required>
-            <option>40-70 K</option>
-            <option>50-80 K</option>
-            <option>60-90 K</option>
-            <option>70-100 K</option>
-            <option>100-150 K</option>
-          </select>
-        </div>
-
-        {/* <!-- Input --> */}
-        <div className="form-group col-lg-3 col-md-12">
-          <label>Expected Salary($)</label>
-          <select className="chosen-single form-select" required>
-            <option>120-350 K</option>
-            <option>40-70 K</option>
-            <option>50-80 K</option>
-            <option>60-90 K</option>
-            <option>70-100 K</option>
-            <option>100-150 K</option>
-          </select>
-        </div>
-
-        {/* <!-- Input --> */}
-        <div className="form-group col-lg-6 col-md-12">
-          <label>Experience</label>
-          <input type="text" name="name" placeholder="5-10 Years" required />
-        </div>
-
-        {/* <!-- Input --> */}
-        <div className="form-group col-lg-6 col-md-12">
-          <label>Age</label>
-          <select className="chosen-single form-select" required>
-            <option>23 - 27 Years</option>
-            <option>24 - 28 Years</option>
-            <option>25 - 29 Years</option>
-            <option>26 - 30 Years</option>
-          </select>
-        </div>
-
-        {/* <!-- Input --> */}
-        <div className="form-group col-lg-6 col-md-12">
-          <label>Education Levels</label>
-          <input type="text" name="name" placeholder="Certificate" required />
-        </div>
-
-        {/* <!-- Input --> */}
-        <div className="form-group col-lg-6 col-md-12">
-          <label>Languages</label>
-          <input
-            type="text"
-            name="name"
-            placeholder="English, Turkish"
-            required
-          />
-        </div>
-
-        {/* <!-- Search Select --> */}
-        <div className="form-group col-lg-6 col-md-12">
-          <label>Categories </label>
+          <label>Playing Positions</label>
           <Select
-            defaultValue={[catOptions[1]]}
+            value={formData.positions.map((value) =>
+              catPositions.find((option) => option.value === value)
+            )}
             isMulti
-            name="colors"
-            options={catOptions}
+            name="positions"
+            options={catPositions}
             className="basic-multi-select"
             classNamePrefix="select"
-            required
+            onChange={handlePositionChange}
           />
         </div>
 
-        {/* <!-- Input --> */}
+        {/* Rugby Type */}
         <div className="form-group col-lg-6 col-md-12">
-          <label>Allow In Search & Listing</label>
-          <select className="chosen-single form-select" required>
-            <option>Yes</option>
-            <option>No</option>
-          </select>
+          <label>Type of Rugby</label>
+          <Select
+            value={formData.rugbyType.map((value) =>
+              catTypes.find((option) => option.value === value)
+            )}
+            isMulti
+            name="rugbyType"
+            options={catTypes}
+            className="basic-multi-select"
+            classNamePrefix="select"
+            onChange={handleTypeChange}
+          />
         </div>
 
-        {/* <!-- About Company --> */}
+        {/* Description */}
         <div className="form-group col-lg-12 col-md-12">
-          <label>Description</label>
-          <textarea placeholder="Spent several years working on sheep on Wall Street. Had moderate success investing in Yugo's on Wall Street. Managed a small team buying and selling Pogo sticks for farmers. Spent several years licensing licorice in West Palm Beach, FL. Developed several new methods for working it banjos in the aftermarket. Spent a weekend importing banjos in West Palm Beach, FL.In this position, the Software Engineer collaborates with Evention's Development team to continuously enhance our current software solutions as well as create new solutions to eliminate the back-office operations and management challenges present"></textarea>
+          <label>About You</label>
+          <textarea
+            name="description"
+            placeholder="Add some details about yourself..."
+            value={formData.description}
+            onChange={handleInputChange}
+            required
+          ></textarea>
         </div>
 
-        {/* <!-- Input --> */}
+        {/* Submit Button */}
         <div className="form-group col-lg-6 col-md-12">
-          <button type="submit" className="theme-btn btn-style-one">
-            Save
+          <button type="submit" className="theme-btn btn-style-one" disabled={loading}>
+            {loading ? "Saving..." : "Save"}
           </button>
         </div>
       </div>
+
+      {/* Feedback Messages */}
+      {successMessage && <p className="success-message">{successMessage}</p>}
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
     </form>
   );
 };

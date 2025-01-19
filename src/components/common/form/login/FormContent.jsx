@@ -32,7 +32,12 @@ const FormContent = ({ setSuccessMessage, setErrorMessage }) => {
 
         // Redirect based on userType
         if (userData.userType === "Player") {
-          navigate("/candidates-dashboard/dashboard");
+          // Check if the profile is completed
+          if (userData.profileCompleted) {
+            navigate("/candidates-dashboard/dashboard");
+          } else {
+            navigate("/candidates-dashboard/my-profile");
+          }
         } else if (userData.userType === "Club") {
           navigate("/employers-dashboard/dashboard");
         } else {

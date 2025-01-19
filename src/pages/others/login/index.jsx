@@ -1,13 +1,12 @@
 
 
 import LogIn from "@/components/pages-menu/login";
-
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
-  title: 'Login || Superio - Job Borad ReactJs Template',
+  title: 'Login | Rugby Transfer Market',
   description:
-    'Superio - Job Borad ReactJs Template',
+    'Login to your Rugby Transfer Market account',
   
 }
 
