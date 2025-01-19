@@ -1,7 +1,6 @@
 
 
 import { Link } from "react-router-dom";
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import candidatesuData from "../../data/candidatesMenuData";
 import { isActiveLink } from "../../utils/linkActiveChecker";
@@ -13,8 +12,6 @@ import { useLocation } from "react-router-dom";
 const DashboardCandidatesSidebar = () => {
   const { pathname } = useLocation();
   const { menu } = useSelector((state) => state.toggle);
-  const percentage = 30;
-
 
   const dispatch = useDispatch();
   // menu togggle handler
@@ -49,29 +46,6 @@ const DashboardCandidatesSidebar = () => {
           ))}
         </ul>
         {/* End navigation */}
-
-        <div className="skills-percentage">
-          <h4>Skills Percentage</h4>
-          <p>
-            `Put value for <strong>Cover Image</strong> field to increase your
-            skill up to <strong>85%</strong>`
-          </p>
-          <div style={{ width: 200, height: 200, margin: "auto" }}>
-            <CircularProgressbar
-              background
-              backgroundPadding={6}
-              styles={buildStyles({
-                backgroundColor: "#7367F0",
-                textColor: "#fff",
-                pathColor: "#fff",
-                trailColor: "transparent",
-              })}
-              value={percentage}
-              text={`${percentage}%`}
-            />
-          </div>{" "}
-          {/* <!-- Pie Graph --> */}
-        </div>
       </div>
     </div>
   );
