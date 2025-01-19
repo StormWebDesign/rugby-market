@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "@/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore"; // Added updateDoc for Firestore updates
 import { Link, useNavigate } from "react-router-dom";
 import LoginWithSocial from "./LoginWithSocial";
 
@@ -29,6 +29,11 @@ const FormContent = ({ setSuccessMessage, setErrorMessage }) => {
       if (userDoc.exists()) {
         const userData = userDoc.data();
         console.log("User type:", userData.userType);
+
+        // Update lastLogin timestamp in Firestore
+        await updateDoc(userDocRef, {
+          lastLogin: new Date(), // Set to current timestamp
+        });
 
         // Redirect based on userType
         if (userData.userType === "Player") {
