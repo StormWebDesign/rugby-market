@@ -5,9 +5,9 @@ import RegisterForm from "@/components/pages-menu/register";
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
-  title: 'Register || Superio - Job Borad ReactJs Template',
+  title: 'Register || Rugby Transfer Market',
   description:
-    'Superio - Job Borad ReactJs Template',
+    'Rugby Transfer Market',
   
 }
 

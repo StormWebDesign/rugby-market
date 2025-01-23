@@ -4,8 +4,8 @@ import MyProfile from "@/components/dashboard-pages/candidates-dashboard/my-prof
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
-  title: "My Profile || Superio - Job Borad ReactJs Template",
-  description: "Superio - Job Borad ReactJs Template",
+  title: "My Profile || Rugby Transfer Market",
+  description: "Rugby Transfer Market",
 };
 
 const MyProfilePage = () => {

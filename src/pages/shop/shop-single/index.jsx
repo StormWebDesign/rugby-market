@@ -4,8 +4,8 @@ import {useParams } from "react-router-dom";
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
-  title: "Shop-details || Superio - Job Borad ReactJs Template",
-  description: "Superio - Job Borad ReactJs Template",
+  title: "Shop-details || Rugby Transfer Market",
+  description: "Rugby Transfer Market",
 };
 
 const ShopSingleDyanmic = () => {

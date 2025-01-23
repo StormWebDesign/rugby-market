@@ -4,8 +4,8 @@ import ShopList from "@/components/shop/shop-list";
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
-  title: "Shop List || Superio - Job Borad ReactJs Template",
-  description: "Superio - Job Borad ReactJs Template",
+  title: "Shop List || Rugby Transfer Market",
+  description: "Rugby Transfer Market",
 };
 
 const ShopListPage = () => {

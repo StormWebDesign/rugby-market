@@ -4,8 +4,8 @@ import Checkout from "@/components/shop/checkout";
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
-  title: "Checkout || Superio - Job Borad ReactJs Template",
-  description: "Superio - Job Borad ReactJs Template",
+  title: "Checkout || Rugby Transfer Market",
+  description: "Rugby Transfer Market",
 };
 
 const CheckoutPage = () => {

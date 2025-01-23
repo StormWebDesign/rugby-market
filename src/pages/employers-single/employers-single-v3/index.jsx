@@ -15,8 +15,8 @@ import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
   title:
-    "Employers Single Dyanmic V3 || Superio - Job Borad ReactJs Template",
-  description: "Superio - Job Borad ReactJs Template",
+    "Employers Single Dyanmic V3 || Rugby Transfer Market",
+  description: "Rugby Transfer Market",
 };
 
 const EmployersSingleV3 = () => {

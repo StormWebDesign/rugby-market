@@ -5,9 +5,9 @@ import CandidatesList from "@/components/candidates-listing-pages/candidates-lis
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
-  title: 'Candidates List V5 || Superio - Job Borad ReactJs Template',
+  title: 'Candidates List V5 || Rugby Transfer Market',
   description:
-    'Superio - Job Borad ReactJs Template',
+    'Rugby Transfer Market',
   
 }
 

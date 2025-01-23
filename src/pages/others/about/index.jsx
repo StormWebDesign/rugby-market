@@ -5,9 +5,9 @@ import About from "@/components/pages-menu/about";
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
-  title: 'About || Superio - Job Borad ReactJs Template',
+  title: 'About || Rugby Transfer Market',
   description:
-    'Superio - Job Borad ReactJs Template',
+    'Rugby Transfer Market',
   
 }
 

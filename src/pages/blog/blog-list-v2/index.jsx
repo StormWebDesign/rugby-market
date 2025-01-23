@@ -5,9 +5,9 @@ import BlogList from "@/components/blog-meu-pages/blog-list-v2";
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
-  title: 'Blog List V2 || Superio - Job Borad ReactJs Template',
+  title: 'Blog List V2 || Rugby Transfer Market',
   description:
-    'Superio - Job Borad ReactJs Template',
+    'Rugby Transfer Market',
   
 }
 

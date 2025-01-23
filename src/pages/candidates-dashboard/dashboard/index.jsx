@@ -4,8 +4,8 @@ import DashboadHome from "@/components/dashboard-pages/candidates-dashboard/dash
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
-  title: "Candidates Dashboard || Superio - Job Borad ReactJs Template",
-  description: "Superio - Job Borad ReactJs Template",
+  title: "Candidates Dashboard || Rugby Transfer Market",
+  description: "Rugby Transfer Market",
 };
 
 const DashboardPage = () => {

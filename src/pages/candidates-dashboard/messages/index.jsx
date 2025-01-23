@@ -4,8 +4,8 @@ import Messages from "@/components/dashboard-pages/candidates-dashboard/messages
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
-  title: "Messages || Superio - Job Borad ReactJs Template",
-  description: "Superio - Job Borad ReactJs Template",
+  title: "Messages || Rugby Transfer Market",
+  description: "Rugby Transfer Market",
 };
 
 const MessageesPage = () => {

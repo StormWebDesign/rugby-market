@@ -16,8 +16,8 @@ import {useParams } from "react-router-dom";
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
-  title: "Job Single Dyanmic V2 || Superio - Job Borad ReactJs Template",
-  description: "Superio - Job Borad ReactJs Template",
+  title: "Job Single Dyanmic V2 || Rugby Transfer Market",
+  description: "Rugby Transfer Market",
 };
 
 const JobSingleDynamicV2 = () => {

@@ -4,8 +4,8 @@ import JobAlerts from "@/components/dashboard-pages/candidates-dashboard/job-ale
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
-  title: "My Job Alerts || Superio - Job Borad ReactJs Template",
-  description: "Superio - Job Borad ReactJs Template",
+  title: "My Job Alerts || Rugby Transfer Market",
+  description: "Rugby Transfer Market",
 };
 
 const JobAlertPage = () => {

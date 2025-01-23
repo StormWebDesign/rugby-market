@@ -4,8 +4,8 @@ import CompanyProfile from "@/components/dashboard-pages/employers-dashboard/com
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
-  title: "Company Profile || Superio - Job Borad ReactJs Template",
-  description: "Superio - Job Borad ReactJs Template",
+  title: "Company Profile || Rugby Transfer Market",
+  description: "Rugby Transfer Market",
 };
 
 const CompanyProfileEmploeeDBPage = () => {
