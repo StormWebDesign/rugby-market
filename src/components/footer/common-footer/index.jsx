@@ -15,8 +15,8 @@ const index = ({ footerStyle = "" }) => {
                   <a href="#">
                     <img
                       
-                      src="/images/logo.svg"
-                      alt="brand"
+                      src="/images/footer-logo.svg"
+                      alt="the rugby transfer market"
                     />
                   </a>
                 </div>
@@ -25,8 +25,7 @@ const index = ({ footerStyle = "" }) => {
                   <a href="thebeehost@support.com">123 456 7890</a>
                 </p>
                 <p className="address">
-                  329 Queensberry Street, North Melbourne VIC
-                  <br /> 3051, Australia. <br />
+                  329 Queensberry Street, North Melbourne VIC<br />
                   <a href="mailto:support@superio.com" className="email">
                     support@superio.com
                   </a>

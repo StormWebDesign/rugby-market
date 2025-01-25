@@ -2,13 +2,13 @@ const CopyrightFooter = () => {
   return (
     <div className="copyright-text">
       <p>
-        © {new Date().getFullYear()} Superio by{" "}
+        © {new Date().getFullYear()} Rugby Transfer Market by {" "}
         <a
-          href="https://themeforest.net/user/ib-themes"
+          href="https://storm.agency"
           target="_blank"
           rel="noopener noreferrer"
         >
-          ib-themes
+          Storm
         </a>
         . All Right Reserved.
       </p>

@@ -18,7 +18,7 @@ const CopyrightFooter2 = () => {
               </Link>
             </div>
             <div className="copyright-text">
-              © {new Date().getFullYear()} Superio by{" "}
+              © {new Date().getFullYear()} Rugby Transfer Market{" "}
               <a
                 href="https://themeforest.net/user/ib-themes"
                 target="_blank"

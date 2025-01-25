@@ -30,31 +30,6 @@ const HeaderNavContent = () => {
             } dropdown`}
           >
             <span>Home</span>
-            <div className="mega-menu">
-              <div className="mega-menu-bar row pt-0">
-                {homeItems.map((item) => (
-                  <div
-                    className="column col-lg-3 col-md-3 col-sm-12"
-                    key={item.id}
-                  >
-                    <ul>
-                      {item.items.map((menu, i) => (
-                        <li
-                          className={
-                            isActiveLink(menu.routePath, pathname)
-                              ? "current"
-                              : ""
-                          }
-                          key={i}
-                        >
-                          <Link to={menu.routePath}>{menu.name}</Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </div>
           </li>
           {/* End homepage menu items */}
 
