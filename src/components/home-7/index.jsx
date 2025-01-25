@@ -9,7 +9,7 @@ import JobFeatured12 from "../job-featured/JobFeatured12";
 import JobFeatured1 from "../job-featured/JobFeatured1";
 import Testimonial2 from "../testimonial/Testimonial2";
 import TopCompany2 from "../top-company/TopCompany2";
-import Header from "./Header";
+import Header from "../header/DefaulHeader";
 import Hero7 from "../hero/hero-7";
 import LoginPopup from "../common/form/login/LoginPopup";
 import MobileMenu from "../header/MobileMenu";

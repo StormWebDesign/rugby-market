@@ -3,10 +3,10 @@
 
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import HeaderNavContent from "./HeaderNavContent";
+import HeaderNavContent from "../header/HeaderNavContent";
 
 
-const DefaulHeader = () => {
+const Header = () => {
   const [navbar, setNavbar] = useState(false);
 
   const changeBackground = () => {
@@ -24,48 +24,50 @@ const DefaulHeader = () => {
   return (
     // <!-- Main Header-->
     <header
-      className={`main-header  ${
+      className={`main-header alternate  ${
         navbar ? "fixed-header animated slideInDown" : ""
       }`}
     >
-      {/* <!-- Main box --> */}
-      <div className="main-box">
-        {/* <!--Nav Outer --> */}
-        <div className="nav-outer">
-          <div className="logo-box">
-            <div className="logo">
-              <Link to="/">
-                <img
-                  src="/images/logo-horizontal-transfer-market.svg"
-                  alt="brand"
-                />
+      <div className="auto-container">
+        {/* <!-- Main box --> */}
+        <div className="main-box">
+          {/* <!--Nav Outer --> */}
+          <div className="nav-outer">
+            <div className="logo-box">
+              <div className="logo">
+                <Link to="/">
+                  <img
+                   
+                    src="/images/header-logo.svg"
+                    alt="rugby transfer market logo"
+                  />
+                </Link>
+              </div>
+            </div>
+            {/* End .logo-box */}
+
+            <HeaderNavContent />
+            {/* <!-- Main Menu End--> */}
+          </div>
+          {/* End .nav-outer */}
+
+          <div className="outer-box">
+            <div className="btn-box">
+              <a
+                href="#"
+                className="theme-btn btn-style-three call-modal"
+                data-bs-toggle="modal"
+                data-bs-target="#loginPopupModal"
+              >
+                Login / Register
+              </a>
+              <Link
+                to="/employers-dashboard/post-jobs"
+                className="theme-btn btn-style-one"
+              >
+                Job Post
               </Link>
             </div>
-          </div>
-          {/* End .logo-box */}
-
-          <HeaderNavContent />
-          {/* <!-- Main Menu End--> */}
-        </div>
-        {/* End .nav-outer */}
-
-        <div className="outer-box">
-          {/* <!-- Login/Register --> */}
-          <div className="btn-box">
-            <a
-              href="#"
-              className="theme-btn btn-style-three call-modal"
-              data-bs-toggle="modal"
-              data-bs-target="#loginPopupModal"
-            >
-              Login / Register
-            </a>
-            <Link
-              to="/employers-dashboard/post-jobs"
-              className="theme-btn btn-style-one"
-            >
-              Job Post
-            </Link>
           </div>
         </div>
       </div>
@@ -73,4 +75,4 @@ const DefaulHeader = () => {
   );
 };
 
-export default DefaulHeader;
+export default Header;

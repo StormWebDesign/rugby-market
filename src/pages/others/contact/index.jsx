@@ -7,7 +7,7 @@ import MetaComponent from "@/components/common/MetaComponent";
 const metadata = {
   title: 'Contact || Rugby Transfer Market',
   description:
-    'Rugby Transfer Market',
+    'Need to get in contact with us at Rugby Transfer Market? Use the form below',
   
 }
 
