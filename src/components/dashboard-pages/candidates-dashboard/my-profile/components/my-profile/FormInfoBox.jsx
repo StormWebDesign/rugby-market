@@ -3,6 +3,10 @@ import { db, auth } from "@/firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import Select from "react-select";
 
+import { catPositions } from "@/data/positions";
+import { catTypes } from "@/data/rugbyTypes";
+import { catGender } from "@/data/genders";
+
 const FormInfoBox = () => {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -15,6 +19,7 @@ const FormInfoBox = () => {
     experience: "",
     dateOfBirth: "",
     education: "",
+    gender: [],
     languages: "",
     positions: [],
     rugbyType: [],
@@ -26,29 +31,6 @@ const FormInfoBox = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isFetching, setIsFetching] = useState(true);
-
-  const catPositions = [
-    { value: "Loose-head prop", label: "Loose-head prop" },
-    { value: "Hooker", label: "Hooker" },
-    { value: "Tight-head prop", label: "Tight-head prop" },
-    { value: "Second-row", label: "Second-row" },
-    { value: "Blindside flanker", label: "Blindside flanker" },
-    { value: "Open side flanker", label: "Open side flanker" },
-    { value: "Number 8", label: "Number 8" },
-    { value: "Scrum-half", label: "Scrum-half" },
-    { value: "Fly-half", label: "Fly-half" },
-    { value: "Left wing", label: "Left wing" },
-    { value: "Inside centre", label: "Inside centre" },
-    { value: "Outside centre", label: "Outside centre" },
-    { value: "Right wing", label: "Right wing" },
-    { value: "Full-back", label: "Full-back" },
-  ];
-
-  const catTypes = [
-    { value: "Rugby Union", label: "Rugby Union" },
-    { value: "Rugby League", label: "Rugby League" },
-    { value: "Rugby Sevens", label: "Rugby Sevens" },
-  ];
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -68,8 +50,9 @@ const FormInfoBox = () => {
           setFormData((prevData) => ({
             ...prevData,
             ...userData,
-            positions: userData.positions || [],
-            rugbyType: userData.rugbyType || [],
+            positions: userData.positions || [], // Ensure positions is an array
+            rugbyType: userData.rugbyType || [], // Ensure rugbyType is an array
+            gender: userData.gender || [], // Ensure gender is an array
           }));
         } else {
           console.error("No user data found in Firestore.");
@@ -101,6 +84,14 @@ const FormInfoBox = () => {
     setFormData((prevData) => ({
       ...prevData,
       rugbyType: selectedOptions.map((option) => option.value),
+    }));
+  };
+
+  const handleGenderChange = (selectedOption) => {
+    const value = selectedOption ? [selectedOption.value] : [];  // Handle single select (return an array)
+    setFormData((prevData) => ({
+      ...prevData,
+      gender: value, // Set the value array to gender
     }));
   };
 
@@ -190,8 +181,23 @@ const FormInfoBox = () => {
           />
         </div>
 
+        {/* Gender */}
+        <div className="form-group col-lg-4 col-md-12">
+          <label>Gender</label>
+          <Select
+            value={formData.gender.map((value) =>
+              catGender.find((option) => option.value === value)
+            )}
+            name="gender"
+            options={catGender}
+            className="chosen-single"
+            classNamePrefix="select"
+            onChange={handleGenderChange} // Ensure this updates formData correctly
+          />
+        </div>
+
         {/* positions */}
-        <div className="form-group col-lg-6 col-md-12">
+        <div className="form-group col-lg-4 col-md-12">
           <label>Playing Positions</label>
           <Select
             value={formData.positions.map((value) =>
@@ -207,7 +213,7 @@ const FormInfoBox = () => {
         </div>
 
         {/* Rugby Type */}
-        <div className="form-group col-lg-6 col-md-12">
+        <div className="form-group col-lg-4 col-md-12">
           <label>Type of Rugby</label>
           <Select
             value={formData.rugbyType.map((value) =>

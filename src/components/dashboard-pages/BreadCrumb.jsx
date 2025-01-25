@@ -1,8 +1,8 @@
 const BreadCrumb = ({ title = "" }) => {
   return (
     <div className="upper-title-box">
-      <h3>{title}</h3>
-      <div className="text">Ready to jump back in?</div>
+      <h1>{title}</h1>
+      {/* <div className="text">Ready to jump back in?</div> */}
     </div>
   );
 };

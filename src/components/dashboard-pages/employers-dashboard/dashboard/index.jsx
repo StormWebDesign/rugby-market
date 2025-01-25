@@ -1,3 +1,6 @@
+import { useState, useEffect } from "react";
+import { auth, db } from "@/firebase"; // Import your Firebase config
+import { doc, getDoc } from "firebase/firestore";
 import MobileMenu from "../../../header/MobileMenu";
 import DashboardHeader from "../../../header/DashboardHeader";
 import LoginPopup from "../../../common/form/login/LoginPopup";
@@ -10,7 +13,39 @@ import Applicants from "./components/Applicants";
 import CopyrightFooter from "../../CopyrightFooter";
 import MenuToggler from "../../MenuToggler";
 
+import { greetingsMap } from "@/data/greetings";
+
 const Index = () => {
+  const [clubName, setFirstName] = useState("World"); // Default name
+  const [greeting, setGreeting] = useState("Hello"); // Default greeting
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const user = auth.currentUser;
+        if (user) {
+          const userDocRef = doc(db, "users", user.uid);
+          const userDoc = await getDoc(userDocRef);
+
+          if (userDoc.exists()) {
+            const userData = userDoc.data();
+            if (userData.clubName) {
+              setFirstName(userData.clubName); // Set the clubName from Firestore
+            }
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+
+    // Detect user's browser language and set the appropriate greeting
+    const browserLanguage = navigator.language.slice(0, 2); // Get the language code (e.g., 'en')
+    const localizedGreeting = greetingsMap[browserLanguage] || "Hello"; // Fallback to "Hello"
+    setGreeting(localizedGreeting);
+  }, []);
   return (
     <div className="page-wrapper dashboard">
       <span className="header-span"></span>
@@ -31,7 +66,8 @@ const Index = () => {
       {/* <!-- Dashboard --> */}
       <section className="user-dashboard">
         <div className="dashboard-outer">
-          <BreadCrumb title="Dashboard Home!" />
+          <BreadCrumb title={`${greeting}, ${clubName}`} />
+          
           {/* breadCrumb */}
 
           <MenuToggler />

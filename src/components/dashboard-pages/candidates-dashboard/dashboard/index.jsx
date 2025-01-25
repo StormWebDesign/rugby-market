@@ -14,24 +14,11 @@ import JobApplied from "./components/JobApplied";
 import DashboardCandidatesHeader from "../../../header/DashboardCandidatesHeader";
 import MenuToggler from "../../MenuToggler";
 
+import greetingsMap from "@/data/greetings";
+
 const Index = () => {
   const [firstName, setFirstName] = useState("World"); // Default name
   const [greeting, setGreeting] = useState("Hello"); // Default greeting
-
-  // Map of greetings for different languages
-  const greetingsMap = {
-    cy: "Helo", //Welsh
-    en: "Hello",
-    es: "Hola",
-    fr: "Bonjour",
-    de: "Hallo",
-    it: "Ciao",
-    ja: "こんにちは",
-    zh: "你好",
-    ko: "안녕하세요",
-    ru: "Здравствуйте",
-    hi: "नमस्ते",
-  };
 
   useEffect(() => {
     const fetchUserData = async () => {
