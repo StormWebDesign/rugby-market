@@ -1,30 +1,120 @@
-
-
-
+import { useState, useEffect } from "react";
+import { db, auth } from "@/firebase";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import Select from "react-select";
 
 const FormInfoBox = () => {
-    const catOptions = [
-        { value: "Banking", label: "Banking" },
-        { value: "Digital & Creative", label: "Digital & Creative" },
-        { value: "Retail", label: "Retail" },
-        { value: "Human Resources", label: "Human Resources" },
-        { value: "Managemnet", label: "Managemnet" },
-        { value: "Accounting & Finance", label: "Accounting & Finance" },
-        { value: "Digital", label: "Digital" },
-        { value: "Creative Art", label: "Creative Art" },
+    const [formData, setFormData] = useState({
+        clubName: "",
+        email: "",
+        phone: "",
+        website: "",
+        establishedSince: "",
+        rugbyType: [],
+        allowSearch: "Yes",
+        aboutClub: "",
+    });
+
+    const [loading, setLoading] = useState(false);
+    const [successMessage, setSuccessMessage] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+    const [isFetching, setIsFetching] = useState(true);
+
+    const catTypes = [
+        { value: "Rugby Union", label: "Rugby Union" },
+        { value: "Rugby League", label: "Rugby League" },
+        { value: "Rugby Sevens", label: "Rugby Sevens" },
     ];
 
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const user = auth.currentUser;
+                if (!user) {
+                    setErrorMessage("User is not logged in.");
+                    return;
+                }
+
+                // Fetch user data from Firestore
+                const userDocRef = doc(db, "users", user.uid);
+                const userDoc = await getDoc(userDocRef);
+
+                if (userDoc.exists()) {
+                    const userData = userDoc.data();
+                    setFormData((prevData) => ({
+                        ...prevData,
+                        ...userData,
+                        rugbyType: userData.rugbyType || [],
+                    }));
+                } else {
+                    console.error("No user data found in Firestore.");
+                }
+            } catch (err) {
+                console.error("Error fetching user data:", err);
+                setErrorMessage("Failed to fetch user data.");
+            } finally {
+                setIsFetching(false);
+            }
+        };
+
+        fetchUserData();
+    }, []);
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({ ...prevData, [name]: value }));
+    };
+
+    const handleTypeChange = (selectedOptions) => {
+        setFormData((prevData) => ({
+            ...prevData,
+            rugbyType: selectedOptions.map((option) => option.value),
+        }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setSuccessMessage("");
+        setErrorMessage("");
+
+        try {
+            const user = auth.currentUser;
+            if (!user) {
+                setErrorMessage("User is not logged in.");
+                return;
+            }
+
+            // Save data to Firestore
+            const userDocRef = doc(db, "users", user.uid);
+            await updateDoc(userDocRef, {
+                ...formData,
+            });
+
+            setSuccessMessage("Profile updated successfully!");
+        } catch (err) {
+            console.error("Error updating profile:", err);
+            setErrorMessage("Failed to update profile. Please try again.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    if (isFetching) {
+        return <p>Loading profile data...</p>;
+    }
+
     return (
-        <form className="default-form">
+        <form onSubmit={handleSubmit} className="default-form">
             <div className="row">
                 {/* <!-- Input --> */}
                 <div className="form-group col-lg-6 col-md-12">
-                    <label>Company name (optional)</label>
+                    <label>Club Name *</label>
                     <input
                         type="text"
-                        name="name"
-                        placeholder="Invisionn"
+                        name="clubName"
+                        value={formData.clubName}
+                        onChange={handleInputChange}
                         required
                     />
                 </div>
@@ -33,68 +123,67 @@ const FormInfoBox = () => {
                 <div className="form-group col-lg-6 col-md-12">
                     <label>Email address</label>
                     <input
-                        type="text"
-                        name="name"
-                        placeholder="ib-themes"
+                        type="email"
+                        name="email"
+                        placeholder="{formData.email}"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        disabled={true}
                         required
                     />
                 </div>
 
                 {/* <!-- Input --> */}
                 <div className="form-group col-lg-6 col-md-12">
-                    <label>Phone</label>
+                    <label>Phone *</label>
                     <input
                         type="text"
-                        name="name"
+                        name="phone"
                         placeholder="0 123 456 7890"
+                        value={formData.phone}
+                        onChange={handleInputChange}
                         required
                     />
                 </div>
 
                 {/* <!-- Input --> */}
                 <div className="form-group col-lg-6 col-md-12">
-                    <label>Website</label>
+                    <label>Website *</label>
                     <input
                         type="text"
-                        name="name"
-                        placeholder="www.invision.com"
+                        name="website"
+                        placeholder="www.yourwebsite.com"
+                        value={formData.website}
+                        onChange={handleInputChange}
                         required
                     />
                 </div>
 
                 {/* <!-- Input --> */}
                 <div className="form-group col-lg-6 col-md-12">
-                    <label>Est. Since</label>
+                    <label>Est. Since</label><br></br>
                     <input
-                        type="text"
-                        name="name"
-                        placeholder="06.04.2020"
-                        required
+                        type="date"
+                        name="establishedSince"
+                        placeholder="01.10.1823"
+                        value={formData.establishedSince}
+                        onChange={handleInputChange}
                     />
-                </div>
-
-                {/* <!-- Input --> */}
-                <div className="form-group col-lg-6 col-md-12">
-                    <label>Team Size</label>
-                    <select className="chosen-single form-select" required>
-                        <option>50 - 100</option>
-                        <option>100 - 150</option>
-                        <option>200 - 250</option>
-                        <option>300 - 350</option>
-                        <option>500 - 1000</option>
-                    </select>
                 </div>
 
                 {/* <!-- Search Select --> */}
                 <div className="form-group col-lg-6 col-md-12">
-                    <label>Multiple Select boxes </label>
+                    <label>Type of Rugby</label>
                     <Select
-                        defaultValue={[catOptions[2]]}
+                        value={formData.rugbyType.map((value) =>
+                            catTypes.find((option) => option.value === value)
+                        )}
                         isMulti
-                        name="colors"
-                        options={catOptions}
+                        name="rugbyType"
+                        options={catTypes}
                         className="basic-multi-select"
                         classNamePrefix="select"
+                        onChange={handleTypeChange}
                     />
                 </div>
 
@@ -107,17 +196,27 @@ const FormInfoBox = () => {
                     </select>
                 </div>
 
-                {/* <!-- About Company --> */}
+                {/* <!-- About the Club --> */}
                 <div className="form-group col-lg-12 col-md-12">
-                    <label>About Company</label>
-                    <textarea placeholder="Spent several years working on sheep on Wall Street. Had moderate success investing in Yugo's on Wall Street. Managed a small team buying and selling Pogo sticks for farmers. Spent several years licensing licorice in West Palm Beach, FL. Developed several new methods for working it banjos in the aftermarket. Spent a weekend importing banjos in West Palm Beach, FL.In this position, the Software Engineer collaborates with Evention's Development team to continuously enhance our current software solutions as well as create new solutions to eliminate the back-office operations and management challenges present"></textarea>
+                    <label>About the Club</label>
+                    <textarea
+                        name="aboutClub"
+                        placeholder="Add some details about your Club..."
+                        value={formData.aboutClub}
+                        onChange={handleInputChange}
+                    ></textarea>
                 </div>
-
-                {/* <!-- Input --> */}
+                {/* Submit Button */}
                 <div className="form-group col-lg-6 col-md-12">
-                    <button className="theme-btn btn-style-one">Save</button>
+                    <button type="submit" className="theme-btn btn-style-one" disabled={loading}>
+                        {loading ? "Saving..." : "Save"}
+                    </button>
                 </div>
             </div>
+
+            {/* Feedback Messages */}
+            {successMessage && <p className="success-message">{successMessage}</p>}
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
         </form>
     );
 };

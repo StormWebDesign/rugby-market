@@ -44,7 +44,12 @@ const FormContent = ({ setSuccessMessage, setErrorMessage }) => {
             navigate("/candidates-dashboard/my-profile");
           }
         } else if (userData.userType === "Club") {
-          navigate("/employers-dashboard/dashboard");
+          // Check if the profile is completed
+          if (userData.profileCompleted) {
+            navigate("/employers-dashboard/dashboard");
+          } else {
+            navigate("/employers-dashboard/company-profile");
+          }
         } else {
           setErrorMessage("User type is not recognized.");
         }
@@ -92,6 +97,7 @@ const FormContent = ({ setSuccessMessage, setErrorMessage }) => {
           <button
             className="theme-btn btn-style-one"
             type="submit"
+            data-bs-dismiss="modal"
             disabled={loading}
           >
             {loading ? "Logging in..." : "Log In"}
