@@ -1,10 +1,42 @@
+import { collection, addDoc, serverTimestamp, getFirestore } from "firebase/firestore";
+import { useAuth } from "../../../../../AuthContext";
 
-
-
-import Map from "../../../Map";
+// import Map from "../../../Map";
 import Select from "react-select";
 
 const PostBoxForm = () => {
+
+  const { currentUser } = useAuth(); // Get the current logged-in user
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+    const jobData = {
+      // Extract form data and convert it to a job object
+      jobTitle: formData.get("name"),
+      jobDescription: formData.get("jobDescription"),
+      specialisms: formData.getAll("colors"), // Get all selected specialisms (multi-select)
+      jobType: formData.get("jobType"),
+      offeredSalary: formData.get("offeredSalary"),
+      // ... other form data fields
+      createdAt: serverTimestamp(), // Add timestamp for job creation
+      createdBy: currentUser.uid, // Add the current user's UID as the creator
+    };
+
+    const db = getFirestore();
+    const jobsCollection = collection(db, "jobs");
+
+    try {
+      await addDoc(jobsCollection, jobData);
+      console.log("Job created successfully!");
+      // Show a success message to the user (e.g., using an alert or modal)
+      alert("Job submitted successfully!");
+    } catch (error) {
+      console.error("Error creating job:", error);
+      // Show an error message to the user (e.g., using an alert or modal)
+      alert("Error submitting job: " + error.message);
+    }
+  };
   const specialisms = [
     { value: "Banking", label: "Banking" },
     { value: "Digital & Creative", label: "Digital & Creative" },
@@ -17,7 +49,7 @@ const PostBoxForm = () => {
   ];
 
   return (
-    <form className="default-form">
+    <form className="default-form" onSubmit={handleSubmit}>
       <div className="row">
         {/* <!-- Input --> */}
         <div className="form-group col-lg-12 col-md-12">
@@ -210,14 +242,16 @@ const PostBoxForm = () => {
         <div className="form-group col-lg-12 col-md-12">
           <div className="map-outer">
             <div style={{ height: "420px", width: "100%" }}>
-              <Map />
+              {/* <Map /> */}
             </div>
           </div>
         </div>
 
         {/* <!-- Input --> */}
         <div className="form-group col-lg-12 col-md-12 text-right">
-          <button className="theme-btn btn-style-one">Next</button>
+          <button className="theme-btn btn-style-one" type="submit">
+            Submit Job
+          </button>
         </div>
       </div>
     </form>
