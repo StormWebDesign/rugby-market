@@ -1,6 +1,6 @@
 export const greetingsMap = {
   cy: "Helo", //Welsh
-  en: "Hello",
+  en: "Greetings",
   es: "Hola",
   fr: "Bonjour",
   de: "Hallo",

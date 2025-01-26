@@ -1,29 +1,32 @@
+import React from "react";
 import Social from "../social/Social";
 
-const CompanyInfo = () => {
+const CompanyInfo = ({ company }) => {
   return (
     <ul className="company-info">
       <li>
-        Primary industry: <span>Software</span>
+        Club Name: <span>{company?.clubName || "Not Provided"}</span>
       </li>
       <li>
-        Company size: <span>501-1,000</span>
+        Primary industry: <span>{company?.industry || "Not Provided"}</span>
       </li>
       <li>
-        Founded in: <span>2011</span>
+        Company size: <span>{company?.size || "Not Provided"}</span>
       </li>
       <li>
-        Phone: <span>123 456 7890</span>
+        Founded in: <span>{company?.establishedSince || "Not Provided"}</span>
       </li>
       <li>
-        Email: <span>info@joio.com</span>
+        Phone: <span>{company?.phone || "Not Provided"}</span>
       </li>
       <li>
-        Location: <span>London, UK</span>
+        Email: <span>{company?.email || "Not Provided"}</span>
       </li>
       <li>
-        Social media:
-        <Social />
+        Location: <span>{company?.location || "Not Provided"}</span>
+      </li>
+      <li>
+        Social media: <Social />
       </li>
     </ul>
   );

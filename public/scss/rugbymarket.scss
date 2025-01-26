@@ -8,3 +8,12 @@
         font-weight: 400;
         padding: 18px 35px 15px 35px;
 }
+
+.manage-job-table {
+        .expired {
+                color: red;
+        }
+        .active {
+                color: #34a853;
+        }
+}

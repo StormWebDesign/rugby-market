@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { db, auth } from "@/firebase";
-import { doc, getDoc, updateDoc, addDoc, collection } from "firebase/firestore";
+import { doc, getDoc, addDoc, collection, Timestamp } from "firebase/firestore";
 import Map from "../../../Map";
 import Select from "react-select";
 
@@ -14,6 +14,8 @@ const PostBoxForm = () => {
   const [formData, setFormData] = useState({
     jobTitle: "",
     jobDescription: "",
+    jobResponsibilities: "",
+    jobExperience: "",
     email: "",
     positions: [],
     rugbyType: [],
@@ -71,7 +73,6 @@ const PostBoxForm = () => {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-
   const handlePositionChange = (selectedOptions) => {
     setFormData((prevData) => ({
       ...prevData,
@@ -100,6 +101,8 @@ const PostBoxForm = () => {
     if (
       !formData.jobTitle ||
       !formData.jobDescription ||
+      !formData.jobResponsibilities ||
+      !formData.jobExperience ||
       !formData.email ||
       !formData.city ||
       !formData.country
@@ -119,12 +122,20 @@ const PostBoxForm = () => {
         return;
       }
 
+      // Fetch the club name from the user's Firestore document
+      const userDocRef = doc(db, "users", user.uid);
+      const userDoc = await getDoc(userDocRef);
+      const userData = userDoc.data();
+
       const jobData = {
         jobTitle: formData.jobTitle,
         applicationDeadlineDate: formData.applicationDeadlineDate,
         jobDescription: formData.jobDescription,
+        jobResponsibilities: formData.jobResponsibilities,
+        jobExperience: formData.jobExperience,
         email: formData.email,
         ownerEmail: user.email, // Use user.email for the creator
+        clubName: userData?.clubName || "Unknown", // Default to "Unknown" if clubName is not available
         positions: formData.positions,
         rugbyType: formData.rugbyType,
         offeredSalary: formData.offeredSalary,
@@ -132,16 +143,11 @@ const PostBoxForm = () => {
         city: formData.city,
         country: formData.country,
         fullAddress: formData.fullAddress,
+        timestamp: Timestamp.fromDate(new Date()), // Add the timestamp of job creation
       };
 
       // Create a new document in the "jobs" collection
-      const jobDocRef = await addDoc(collection(db, "jobs"), jobData);
-
-      // Save data to Firestore
-      // const userDocRef = doc(db, "users", user.uid);
-      // await updateDoc(userDocRef, {
-      //   ...formData,
-      // });
+      await addDoc(collection(db, "jobs"), jobData);
 
       setSuccessMessage("The job has been created successfully!");
     } catch (error) {
@@ -157,6 +163,7 @@ const PostBoxForm = () => {
   if (isFetching) {
     return <p>Loading profile data...</p>;
   }
+
   return (
     <form onSubmit={handleSubmit} className="default-form">
       <div className="row">
@@ -181,12 +188,32 @@ const PostBoxForm = () => {
           />
         </div>
 
-        {/* <!-- About Company --> */}
+        {/* <!-- Job Description --> */}
         <div className="form-group col-lg-12 col-md-12">
           <label>Job Description</label>
           <textarea
             name="jobDescription"
             placeholder="Add some details about the job..."
+            onChange={handleInputChange}
+          ></textarea>
+        </div>
+
+        {/* <!-- Job Description --> */}
+        <div className="form-group col-lg-12 col-md-12">
+          <label>Key Responsibilities</label>
+          <textarea
+            name="jobResponsibilities"
+            placeholder="Add some Key Responsibilities for the job..."
+            onChange={handleInputChange}
+          ></textarea>
+        </div>
+
+        {/* <!-- Job Description --> */}
+        <div className="form-group col-lg-12 col-md-12">
+          <label>Skill & Experience</label>
+          <textarea
+            name="jobExperience"
+            placeholder="Add some details about required skills and experience..."
             onChange={handleInputChange}
           ></textarea>
         </div>
@@ -242,7 +269,6 @@ const PostBoxForm = () => {
             placeholder="£20,000.00"
             onChange={handleInputChange}
           />
-
         </div>
 
         {/* Gender */}
@@ -252,9 +278,10 @@ const PostBoxForm = () => {
             value={formData.gender.map((value) =>
               catGender.find((option) => option.value === value)
             )}
+            isMulti
             name="gender"
             options={catGender}
-            className="chosen-single"
+            className="basic-multi-select"
             classNamePrefix="select"
             onChange={handleGenderChange}
           />

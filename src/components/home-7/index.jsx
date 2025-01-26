@@ -5,7 +5,7 @@ import FooterDefault from "../footer/common-footer";
 import Funfact from "../fun-fact-counter/Funfact";
 import JobCategorie1 from "../job-categories/JobCategorie1";
 import Filter from "../job-featured/filter-dropdown/Filter";
-import JobFeatured12 from "../job-featured/JobFeatured12";
+// import JobFeatured12 from "../job-featured/JobFeatured12";
 import JobFeatured1 from "../job-featured/JobFeatured1";
 import Testimonial2 from "../testimonial/Testimonial2";
 import TopCompany2 from "../top-company/TopCompany2";
@@ -14,7 +14,7 @@ import Hero7 from "../hero/hero-7";
 import LoginPopup from "../common/form/login/LoginPopup";
 import MobileMenu from "../header/MobileMenu";
 import { Link } from "react-router-dom";
-import FeaturedJobs from "../job-featured/FeaturedJobs";
+// import FeaturedJobs from "../job-featured/FeaturedJobs";
 
 
 const index = () => {
@@ -34,7 +34,7 @@ const index = () => {
 
       <Hero7 />
       {/* End Hero Section */}
-      <FeaturedJobs/>
+      {/* <FeaturedJobs/> */}
 
      
 
@@ -146,9 +146,9 @@ const index = () => {
               Know your worth and find the job that qualify your life
             </div>
           </div>
-          <div className="job-carousel gap-x25">
+          {/* <div className="job-carousel gap-x25">
             <JobFeatured12 />
-          </div>
+          </div> */}
         </div>
       </section>
       {/* <!-- End Job Section --> */}
