@@ -1,18 +1,52 @@
+import { useEffect, useState } from "react";
+import { db } from "@/firebase"; // Adjust path to your firebase.js
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { format } from "date-fns"; // Import date-fns for formatting
+import CountUp from 'react-countup';
 import SearchForm from "../../common/job-search/SearchForm";
 import PopularSearch from "../PopularSearch";
 import Partner from "../../common/partner/Partner";
 
+const Index = () => {
+  const [jobCount, setJobCount] = useState(0);
+  const [clubCount, setClubCount] = useState(0);
+  const [playerCount, setPlayerCount] = useState(0);
 
-const index = () => {
+  useEffect(() => {
+    const fetchCounts = async () => {
+      try {
+        // Fetch job count
+        const today = format(new Date(), "yyyy-MM-dd");
+        const jobsRef = collection(db, "jobs");
+        const jobQuery = query(jobsRef, where("applicationDeadlineDate", ">", today));
+        const jobSnapshot = await getDocs(jobQuery);
+        setJobCount(jobSnapshot.size);
+
+        // Fetch user counts
+        const usersRef = collection(db, "users");
+        const clubQuery = query(usersRef, where("userType", "==", "Club"));
+        const playerQuery = query(usersRef, where("userType", "==", "Player"));
+
+        const [clubSnapshot, playerSnapshot] = await Promise.all([
+          getDocs(clubQuery),
+          getDocs(playerQuery),
+        ]);
+
+        setClubCount(clubSnapshot.size);
+        setPlayerCount(playerSnapshot.size);
+      } catch (error) {
+        console.error("Error fetching counts:", error);
+      }
+    };
+
+    fetchCounts();
+  }, []);
+  
   return (
     <section className="banner-section-seven">
       <div className="image-outer" data-aos="fade-in" data-aos-delay="300">
         <figure className="image">
-          <img
-            
-            src="/images/resource/banner-img-8.png"
-            alt="hero banner"
-          />
+          <img src="/images/resource/banner-img-8.png" alt="hero banner" />
         </figure>
       </div>
       {/* End image-outer */}
@@ -27,15 +61,20 @@ const index = () => {
                 data-aos-delay="500"
               >
                 <h3>
-                  There Are <span className="colored">93,178</span> <br />{" "}
-                  Postings Here For you!
+                  There Are <span className="colored"><CountUp end={jobCount} /></span> <br />{" "}
+                  Rugby jobs available!
                 </h3>
+
+                <h4>
+                  We have <span className="colored"><CountUp end={clubCount} /></span> Clubs and{" "}
+                  <span className="colored"><CountUp end={playerCount} /></span> Players signed up!
+                </h4>
                 <div className="text">
-                  Find Jobs, Employment & Career Opportunities
+                  Find Positions, Jobs & Career Opportunities
                 </div>
               </div>
 
-              {/* <!-- Job Search Form --> */}
+              {/* Job Search Form */}
               <div
                 className="job-search-form"
                 data-aos="fade-up"
@@ -43,11 +82,11 @@ const index = () => {
               >
                 <SearchForm />
               </div>
-              {/* <!-- Job Search Form --> */}
+              {/* End Job Search Form */}
 
-              {/* <!-- Popular Search --> */}
+              {/* Popular Search */}
               <PopularSearch />
-              {/* <!-- End Popular Search --> */}
+              {/* End Popular Search */}
 
               <div
                 className="clients-section-two"
@@ -56,8 +95,7 @@ const index = () => {
               >
                 <Partner />
               </div>
-
-              {/* <!-- End Partner --> */}
+              {/* End Partner */}
             </div>
           </div>
           {/* End .col */}
@@ -67,4 +105,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;
