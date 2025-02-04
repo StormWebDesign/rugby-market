@@ -33,9 +33,9 @@ const Header = () => {
                 <Link to="/" className="noSticky">
                   <img
                    
-                    src="/images/logo-2.svg"
-                    alt="logo"
-                    title="brand"
+                   src="/images/header-logo.svg"
+                   alt="rugby transfer market logo"
+                    title="rugby transfer market logo"
                   />
                 </Link>
                 <Link to="/" className="isSticky">
@@ -51,17 +51,6 @@ const Header = () => {
           </div>
           {/* End nav-outer */}
 
-          <div className="outer-box">
-            {/* <!-- Login/Register --> */}
-            <div className="btn-box">
-              <Link
-                to="/employers-dashboard/post-jobs"
-                className="theme-btn btn-style-one"
-              >
-                <span className="btn-title">Job Post</span>
-              </Link>
-            </div>
-          </div>
           {/* End outer-box */}
         </div>
       </div>

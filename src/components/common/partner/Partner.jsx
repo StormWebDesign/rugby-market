@@ -9,21 +9,19 @@ const Partner = () => {
   useEffect(() => {
     const fetchClubLogos = async () => {
       try {
-        // Reference to the 'users' collection
         const usersRef = collection(db, "users");
-        // Query for clubs with a non-null club_logoImageURL
         const q = query(
           usersRef,
           where("userType", "==", "Club"),
           where("club_logoImageURL", "!=", null)
         );
 
-        // Fetch documents
         const querySnapshot = await getDocs(q);
         const logos = querySnapshot.docs.map((doc) => ({
           id: doc.id,
-          link: "#", // You can replace this with dynamic links if required
+          link: "#", // Placeholder for future club profiles
           imgURL: doc.data().club_logoImageURL,
+          clubName: doc.data().clubName || "Rugby Club",
         }));
 
         setSliderGallery(logos);
@@ -39,7 +37,8 @@ const Partner = () => {
     dots: false,
     slidesToShow: 6,
     slidesToScroll: 1,
-    autoplay: false,
+    autoplay: true,
+    infinite: false, // Prevent react-slick from duplicating slides
     speed: 1200,
     responsive: [
       { breakpoint: 1400, settings: { slidesToShow: 6 } },
@@ -52,19 +51,19 @@ const Partner = () => {
   };
 
   return (
-    <>
+    <div className="clients-section-two">
       <Slider {...settings} arrows={false}>
         {sliderGallery.map((item) => (
-          <li className="slide-item" key={item.id}>
+          <div className="slide-item" key={item.id}>
             <figure className="image-box">
               <a href={item.link}>
-                <img src={item.imgURL} alt="club logo" />
+                <img src={item.imgURL} alt={item.clubName} />
               </a>
             </figure>
-          </li>
+          </div>
         ))}
       </Slider>
-    </>
+    </div>
   );
 };
 

@@ -37,7 +37,6 @@ const Header = () => {
               <div className="logo">
                 <Link to="/">
                   <img
-                   
                     src="/images/header-logo.svg"
                     alt="rugby transfer market logo"
                   />

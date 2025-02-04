@@ -61,7 +61,9 @@ const DashboardHeader = () => {
                         <div className="logo-box">
                             <div className="logo">
                                 <Link to="/">
-                                    <img alt="brand" src="/images/logo.svg" />
+                                    <img
+                                        src="/images/header-logo.svg"
+                                        alt="rugby transfer market logo" />
                                 </Link>
                             </div>
                         </div>

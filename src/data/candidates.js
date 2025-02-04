@@ -6,7 +6,7 @@ const candidates = [
         designation: "UI Designer",
         location: "London, UK",
         hourlyRate: "99",
-        tags: ["App", "Design", "Digital"],
+        tags: ["Wing", "Inside Centre"],
         destination: {
             min: 0,
             max: 10,

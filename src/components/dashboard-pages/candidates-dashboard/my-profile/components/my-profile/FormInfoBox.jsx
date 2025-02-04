@@ -6,6 +6,8 @@ import Select from "react-select";
 import { catPositions } from "@/data/positions";
 import { catTypes } from "@/data/rugbyTypes";
 import { catGender } from "@/data/genders";
+import { catWeight } from "@/data/weight";
+import { catHeight } from "@/data/height";
 
 const FormInfoBox = () => {
   const [formData, setFormData] = useState({
@@ -18,6 +20,8 @@ const FormInfoBox = () => {
     expectedSalary: "",
     experience: "",
     dateOfBirth: "",
+    height: [],
+    weight: [],
     education: "",
     gender: [],
     languages: "",
@@ -53,6 +57,8 @@ const FormInfoBox = () => {
             positions: userData.positions || [], // Ensure positions is an array
             rugbyType: userData.rugbyType || [], // Ensure rugbyType is an array
             gender: userData.gender || [], // Ensure gender is an array
+            height: userData.height || [], // Ensure height is an array
+            weight: userData.weight || [], // Ensure weight is an array
           }));
         } else {
           console.error("No user data found in Firestore.");
@@ -92,6 +98,22 @@ const FormInfoBox = () => {
     setFormData((prevData) => ({
       ...prevData,
       gender: value, // Set the value array to gender
+    }));
+  };
+
+  const handleWeightChange = (selectedOption) => {
+    const value = selectedOption ? [selectedOption.value] : [];  // Handle single select (return an array)
+    setFormData((prevData) => ({
+      ...prevData,
+      weight: value, // Set the value array to weight
+    }));
+  };
+
+  const handleHeightChange = (selectedOption) => {
+    const value = selectedOption ? [selectedOption.value] : [];  // Handle single select (return an array)
+    setFormData((prevData) => ({
+      ...prevData,
+      height: value, // Set the value array to height
     }));
   };
 
@@ -181,23 +203,8 @@ const FormInfoBox = () => {
           />
         </div>
 
-        {/* Gender */}
-        <div className="form-group col-lg-4 col-md-12">
-          <label>Gender</label>
-          <Select
-            value={formData.gender.map((value) =>
-              catGender.find((option) => option.value === value)
-            )}
-            name="gender"
-            options={catGender}
-            className="chosen-single"
-            classNamePrefix="select"
-            onChange={handleGenderChange} // Ensure this updates formData correctly
-          />
-        </div>
-
         {/* positions */}
-        <div className="form-group col-lg-4 col-md-12">
+        <div className="form-group col-lg-6 col-md-12">
           <label>Playing Positions</label>
           <Select
             value={formData.positions.map((value) =>
@@ -213,7 +220,7 @@ const FormInfoBox = () => {
         </div>
 
         {/* Rugby Type */}
-        <div className="form-group col-lg-4 col-md-12">
+        <div className="form-group col-lg-6 col-md-12">
           <label>Type of Rugby</label>
           <Select
             value={formData.rugbyType.map((value) =>
@@ -225,6 +232,51 @@ const FormInfoBox = () => {
             className="basic-multi-select"
             classNamePrefix="select"
             onChange={handleTypeChange}
+          />
+        </div>
+
+        {/* Gender */}
+        <div className="form-group col-lg-4 col-md-12">
+          <label>Gender</label>
+          <Select
+            value={formData.gender.map((value) =>
+              catGender.find((option) => option.value === value)
+            )}
+            name="gender"
+            options={catGender}
+            className="chosen-single"
+            classNamePrefix="select"
+            onChange={handleGenderChange} // Ensure this updates formData correctly
+          />
+        </div>
+
+        {/* Gender */}
+        <div className="form-group col-lg-4 col-md-12">
+          <label>Gender</label>
+          <Select
+            value={formData.gender.map((value) =>
+              catGender.find((option) => option.value === value)
+            )}
+            name="gender"
+            options={catGender}
+            className="chosen-single"
+            classNamePrefix="select"
+            onChange={handleGenderChange} // Ensure this updates formData correctly
+          />
+        </div>
+
+        {/* Gender */}
+        <div className="form-group col-lg-4 col-md-12">
+          <label>Gender</label>
+          <Select
+            value={formData.gender.map((value) =>
+              catGender.find((option) => option.value === value)
+            )}
+            name="gender"
+            options={catGender}
+            className="chosen-single"
+            classNamePrefix="select"
+            onChange={handleGenderChange} // Ensure this updates formData correctly
           />
         </div>
 

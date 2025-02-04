@@ -5,7 +5,7 @@ import FooterDefault from "@/components/footer/common-footer";
 import DefaulHeader from "@/components/header/DefaulHeader";
 import MobileMenu from "@/components/header/MobileMenu";
 import JobDetailsDescriptions from "@/components/employer-single-pages/shared-components/JobDetailsDescriptions";
-import RelatedJobs from "@/components/employer-single-pages/related-jobs/RelatedJobs";
+// import RelatedJobs from "@/components/employer-single-pages/related-jobs/RelatedJobs";
 import MapJobFinder from "@/components/job-listing-pages/components/MapJobFinder";
 import Social from "@/components/employer-single-pages/social/Social";
 import PrivateMessageBox from "@/components/employer-single-pages/shared-components/PrivateMessageBox";
@@ -158,7 +158,7 @@ const EmployersSingleV1 = () => {
                   </div>
                   {/* End .title-box */}
 
-                  <RelatedJobs />
+                  {/* <RelatedJobs /> */}
                   {/* End RelatedJobs */}
                 </div>
                 {/* <!-- Related Jobs --> */}

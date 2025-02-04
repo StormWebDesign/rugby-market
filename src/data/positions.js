@@ -8,10 +8,9 @@ export const catPositions = [
     { value: "Number 8", label: "Number 8" },
     { value: "Scrum-half", label: "Scrum-half" },
     { value: "Fly-half", label: "Fly-half" },
-    { value: "Left wing", label: "Left wing" },
     { value: "Inside centre", label: "Inside centre" },
     { value: "Outside centre", label: "Outside centre" },
-    { value: "Right wing", label: "Right wing" },
+    { value: "Wing", label: "Wing" },
     { value: "Full-back", label: "Full-back" },
   ];
   

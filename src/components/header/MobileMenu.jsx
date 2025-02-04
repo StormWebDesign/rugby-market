@@ -14,9 +14,8 @@ const MobileMenu = () => {
               <div className="logo">
                 <Link to="/">
                   <img
-                   
-                    src="/images/logo.svg"
-                    alt="brand"
+                    src="/images/header-logo.svg"
+                    alt="rugby transfer market logo"
                   />
                 </Link>
               </div>

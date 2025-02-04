@@ -10,7 +10,7 @@ import GalleryBox from "@/components/candidates-single-pages/shared-components/G
 import Social from "@/components/candidates-single-pages/social/Social";
 import JobSkills from "@/components/candidates-single-pages/shared-components/JobSkills";
 import AboutVideo from "@/components/candidates-single-pages/shared-components/AboutVideo";
-import {useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import MetaComponent from "@/components/common/MetaComponent";
 
@@ -27,7 +27,7 @@ const CandidateSingleDynamicV1 = () => {
 
   return (
     <>
-    <MetaComponent meta={metadata} />
+      <MetaComponent meta={metadata} />
       {/* <!-- Header Span --> */}
       <span className="header-span"></span>
 
@@ -49,7 +49,7 @@ const CandidateSingleDynamicV1 = () => {
                 <div className="content">
                   <figure className="image">
                     <img
-                     
+
                       src={candidate?.avatar}
                       alt="avatar"
                     />
@@ -85,7 +85,17 @@ const CandidateSingleDynamicV1 = () => {
                     href="/images/sample.pdf"
                     download
                   >
-                    Download CV
+                    Download Rugby CV
+                  </a>
+                </div>
+
+                <div className="btn-box">
+                  <a
+                    className="theme-btn btn-style-one"
+                    href="/images/sample.pdf"
+                    download
+                  >
+                    Download Work CV
                   </a>
                   <button className="bookmark-btn">
                     <i className="flaticon-bookmark"></i>
@@ -190,21 +200,27 @@ const CandidateSingleDynamicV1 = () => {
                         </li>
 
                         <li>
-                          <i className="icon icon-rate"></i>
-                          <h5>Current Salary:</h5>
-                          <span>11K - 15K</span>
+                          <i className="icon icon-user-2"></i>
+                          <h5>Height:</h5>
+                          <span>Female</span>
                         </li>
 
                         <li>
-                          <i className="icon icon-salary"></i>
-                          <h5>Expected Salary:</h5>
-                          <span>26K - 30K</span>
+                          <i className="icon icon-user-2"></i>
+                          <h5>Weight:</h5>
+                          <span>Female</span>
                         </li>
 
                         <li>
                           <i className="icon icon-user-2"></i>
                           <h5>Gender:</h5>
                           <span>Female</span>
+                        </li>
+
+                        <li>
+                          <i className="icon icon-language"></i>
+                          <h5>Most Recent Club:</h5>
+                          <span>English, German, Spanish</span>
                         </li>
 
                         <li>
@@ -217,6 +233,18 @@ const CandidateSingleDynamicV1 = () => {
                           <i className="icon icon-degree"></i>
                           <h5>Education Level:</h5>
                           <span>Master Degree</span>
+                        </li>
+
+                        <li>
+                          <i className="icon icon-rate"></i>
+                          <h5>Current Salary:</h5>
+                          <span>11K - 15K</span>
+                        </li>
+
+                        <li>
+                          <i className="icon icon-salary"></i>
+                          <h5>Expected Salary:</h5>
+                          <span>26K - 30K</span>
                         </li>
                       </ul>
                     </div>
