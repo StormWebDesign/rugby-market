@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { db, auth } from "@/firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import Map from "../../../Map";
 
 import { rugbyCountries } from "@/data/countries";
 

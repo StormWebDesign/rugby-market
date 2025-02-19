@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { auth, db } from "@/firebase"; // Import your Firebase config
 import { doc, getDoc } from "firebase/firestore";
+import { Link } from "react-router-dom";
 
 import MobileMenu from "../../../header/MobileMenu";
 import LoginPopup from "../../../common/form/login/LoginPopup";
@@ -9,12 +10,16 @@ import BreadCrumb from "../../BreadCrumb";
 import TopCardBlock from "./components/TopCardBlock";
 import ProfileChart from "./components/ProfileChart";
 import Notification from "./components/Notification";
+import MyDetails from "./components/MyDetails";
 import CopyrightFooter from "../../CopyrightFooter";
-import JobApplied from "./components/JobApplied";
+// import JobApplied from "./components/JobApplied";
 import DashboardCandidatesHeader from "../../../header/DashboardCandidatesHeader";
 import MenuToggler from "../../MenuToggler";
 
 import greetingsMap from "@/data/greetings";
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 
 const Index = () => {
   const [firstName, setFirstName] = useState("World"); // Default name
@@ -80,7 +85,7 @@ const Index = () => {
           {/* End .row top card block */}
 
           <div className="row">
-            <div className="col-xl-7 col-lg-12">
+            <div className="col-xl-6 col-lg-12">
               {/* <!-- Graph widget --> */}
               <div className="graph-widget ls-widget">
                 <ProfileChart />
@@ -89,7 +94,7 @@ const Index = () => {
             </div>
             {/* End .col */}
 
-            <div className="col-xl-5 col-lg-12">
+            <div className="col-xl-3 col-lg-12">
               {/* <!-- Notification Widget --> */}
               <div className="notification-widget ls-widget">
                 <div className="widget-title">
@@ -97,6 +102,22 @@ const Index = () => {
                 </div>
                 <div className="widget-content">
                   <Notification />
+                </div>
+              </div>
+            </div>
+            {/* End .col */}
+
+            <div className="col-xl-3 col-lg-12">
+              {/* <!-- MyDetails Widget --> */}
+              <div className="mydetails-widget ls-widget">
+                <div className="widget-title">
+                  <h4>Your Details</h4>
+                  <Link to="/candidates-dashboard/my-profile">
+                    <FontAwesomeIcon icon={faPenToSquare} />
+                  </Link>
+                </div>
+                <div className="widget-content">
+                  <MyDetails />
                 </div>
               </div>
             </div>
@@ -112,7 +133,7 @@ const Index = () => {
                   <div className="row">
                     {/* <!-- Candidate block three --> */}
 
-                    <JobApplied />
+                    {/* <JobApplied /> */}
                   </div>
                 </div>
               </div>

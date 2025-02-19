@@ -1,13 +1,14 @@
 import MobileMenu from "../../../header/MobileMenu";
 import LoginPopup from "../../../common/form/login/LoginPopup";
 import DashboardCandidatesSidebar from "../../../header/DashboardCandidatesSidebar";
-// import BreadCrumb from "../../BreadCrumb";
-import MyProfile from "./components/my-profile";
-import RugbyDetails from "./components/RugbyDetails";
-import ContactInfoBox from "./components/ContactInfoBox";
+import BreadCrumb from "../../BreadCrumb";
+import RugbyDetails from "../my-profile/components/RugbyDetails";
 import CopyrightFooter from "../../CopyrightFooter";
+import Resume from "./components";
+import PlayingClubHistory from "./components/PlayingClubHistory";
 import DashboardCandidatesHeader from "../../../header/DashboardCandidatesHeader";
 import MenuToggler from "../../MenuToggler";
+import PlayingClubHistoryForm from "./components/PlayingClubHistory";
 
 const index = () => {
   return (
@@ -39,16 +40,7 @@ const index = () => {
               <div className="ls-widget">
                 <div className="tabs-box">
                   <div className="widget-title">
-                  </div>
-                  <MyProfile />
-                </div>
-              </div>
-              {/* <!-- Ls widget --> */}
-
-              <div className="ls-widget">
-                <div className="tabs-box">
-                  <div className="widget-title">
-                    <h4>Playing Profile</h4>
+                    <h4>Current Playing Profile</h4>
                   </div>
                   {/* End widget-title */}
                   <div className="widget-content">
@@ -57,20 +49,20 @@ const index = () => {
                 </div>
               </div>
               {/* <!-- Ls widget --> */}
-
               <div className="ls-widget">
                 <div className="tabs-box">
                   <div className="widget-title">
-                    <h4>Your Address</h4>
+                    <h4>Previous Playing Profile</h4>
                   </div>
                   {/* End widget-title */}
+
                   <div className="widget-content">
-                    <ContactInfoBox />
+                  <PlayingClubHistory />
                   </div>
+                  {/* End widget-content */}
                 </div>
               </div>
-              {/* <!-- Ls widget --> */}
-
+              {/* End ls-widget */}
             </div>
           </div>
           {/* End .row */}

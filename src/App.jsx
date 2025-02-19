@@ -95,6 +95,8 @@ import JobAlertPage from "./pages/candidates-dashboard/job-alerts";
 import MessageesPage from "./pages/candidates-dashboard/messages";
 import MyProfilePage from "./pages/candidates-dashboard/my-profile";
 import MyResumePage from "./pages/candidates-dashboard/my-resume";
+import MyRugbyCareerPage from "./pages/candidates-dashboard/my-rugby-career";
+import MyImagesPage from "./pages/candidates-dashboard/my-images";
 import PackagePage from "./pages/candidates-dashboard/packages";
 import ShortListedJobsPage from "./pages/candidates-dashboard/short-listed-jobs";
 import LoginPage from "./pages/others/login";
@@ -218,6 +220,8 @@ function App() {
                     <Route path="messages" element={<MessageesPage/>} />
                     <Route path="my-profile" element={<MyProfilePage/>} />
                     <Route path="my-resume" element={<MyResumePage/>} />
+                    <Route path="my-rugby-career" element={<MyRugbyCareerPage/>} />
+                    <Route path="my-images" element={<MyImagesPage/>} />
                     <Route path="packages" element={<PackagePage/>} />
                     <Route path="short-listed-jobs" element={<ShortListedJobsPage/>} />
 

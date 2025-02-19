@@ -3,11 +3,7 @@ import { db, auth } from "@/firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import Select from "react-select";
 
-import { catPositions } from "@/data/positions";
-import { catTypes } from "@/data/rugbyTypes";
 import { catGender } from "@/data/genders";
-import { catWeight } from "@/data/weight";
-import { catHeight } from "@/data/height";
 
 const FormInfoBox = () => {
   const [formData, setFormData] = useState({
@@ -20,13 +16,12 @@ const FormInfoBox = () => {
     expectedSalary: "",
     experience: "",
     dateOfBirth: "",
-    height: [],
-    weight: [],
+    heightFt: "",
+    heightInch: "",
+    weight: "",
     education: "",
     gender: [],
     languages: "",
-    positions: [],
-    rugbyType: [],
     allowSearch: "Yes",
     description: "",
   });
@@ -54,11 +49,7 @@ const FormInfoBox = () => {
           setFormData((prevData) => ({
             ...prevData,
             ...userData,
-            positions: userData.positions || [], // Ensure positions is an array
-            rugbyType: userData.rugbyType || [], // Ensure rugbyType is an array
             gender: userData.gender || [], // Ensure gender is an array
-            height: userData.height || [], // Ensure height is an array
-            weight: userData.weight || [], // Ensure weight is an array
           }));
         } else {
           console.error("No user data found in Firestore.");
@@ -79,41 +70,42 @@ const FormInfoBox = () => {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handlePositionChange = (selectedOptions) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      positions: selectedOptions.map((option) => option.value),
-    }));
+  const handleHeightChange = (e) => {
+    const { name, value } = e.target;
+    let numericValue = parseInt(value, 10) || 0;
+
+    setFormData((prevData) => {
+      let updatedData = { ...prevData };
+
+      if (name === "heightInch") {
+        if (numericValue >= 12) {
+          let newFeet = prevData.heightFt + 1;
+          updatedData.heightFt = newFeet > 7 ? 7 : newFeet; // Max 7ft
+          updatedData.heightInch = newFeet > 7 ? 11 : 0; // Reset or stop at 11
+        } else {
+          updatedData.heightInch = numericValue;
+        }
+      } else if (name === "heightFt") {
+        updatedData.heightFt = numericValue > 7 ? 7 : numericValue; // Max 7ft
+      }
+
+      return updatedData;
+    });
   };
 
-  const handleTypeChange = (selectedOptions) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      rugbyType: selectedOptions.map((option) => option.value),
-    }));
+
+  const handleWeightChange = (e) => {
+    let weightValue = parseFloat(e.target.value) || 0;
+    setFormData((prevData) => ({ ...prevData, weight: weightValue }));
   };
+
+
 
   const handleGenderChange = (selectedOption) => {
     const value = selectedOption ? [selectedOption.value] : [];  // Handle single select (return an array)
     setFormData((prevData) => ({
       ...prevData,
       gender: value, // Set the value array to gender
-    }));
-  };
-
-  const handleWeightChange = (selectedOption) => {
-    const value = selectedOption ? [selectedOption.value] : [];  // Handle single select (return an array)
-    setFormData((prevData) => ({
-      ...prevData,
-      weight: value, // Set the value array to weight
-    }));
-  };
-
-  const handleHeightChange = (selectedOption) => {
-    const value = selectedOption ? [selectedOption.value] : [];  // Handle single select (return an array)
-    setFormData((prevData) => ({
-      ...prevData,
-      height: value, // Set the value array to height
     }));
   };
 
@@ -153,7 +145,7 @@ const FormInfoBox = () => {
     <form onSubmit={handleSubmit} className="default-form">
       <div className="row">
         {/* First Name */}
-        <div className="form-group col-lg-6 col-md-12">
+        <div className="form-group col-lg-3 col-md-12">
           <label>First Name</label>
           <input
             type="text"
@@ -165,7 +157,7 @@ const FormInfoBox = () => {
           />
         </div>
         {/* Last Name */}
-        <div className="form-group col-lg-6 col-md-12">
+        <div className="form-group col-lg-3 col-md-12">
           <label>Last Name</label>
           <input
             type="text"
@@ -178,7 +170,7 @@ const FormInfoBox = () => {
         </div>
 
         {/* Phone */}
-        <div className="form-group col-lg-6 col-md-12">
+        <div className="form-group col-lg-3 col-md-12">
           <label>Phone</label>
           <input
             type="text"
@@ -191,7 +183,7 @@ const FormInfoBox = () => {
         </div>
 
         {/* Email */}
-        <div className="form-group col-lg-6 col-md-12">
+        <div className="form-group col-lg-3 col-md-12">
           <label>Email Address</label>
           <input
             type="email"
@@ -203,40 +195,8 @@ const FormInfoBox = () => {
           />
         </div>
 
-        {/* positions */}
-        <div className="form-group col-lg-6 col-md-12">
-          <label>Playing Positions</label>
-          <Select
-            value={formData.positions.map((value) =>
-              catPositions.find((option) => option.value === value)
-            )}
-            isMulti
-            name="positions"
-            options={catPositions}
-            className="basic-multi-select"
-            classNamePrefix="select"
-            onChange={handlePositionChange}
-          />
-        </div>
-
-        {/* Rugby Type */}
-        <div className="form-group col-lg-6 col-md-12">
-          <label>Type of Rugby</label>
-          <Select
-            value={formData.rugbyType.map((value) =>
-              catTypes.find((option) => option.value === value)
-            )}
-            isMulti
-            name="rugbyType"
-            options={catTypes}
-            className="basic-multi-select"
-            classNamePrefix="select"
-            onChange={handleTypeChange}
-          />
-        </div>
-
         {/* Gender */}
-        <div className="form-group col-lg-4 col-md-12">
+        <div className="form-group col-lg-3 col-md-12">
           <label>Gender</label>
           <Select
             value={formData.gender.map((value) =>
@@ -250,33 +210,48 @@ const FormInfoBox = () => {
           />
         </div>
 
-        {/* Gender */}
+        {/* Height */}
         <div className="form-group col-lg-4 col-md-12">
-          <label>Gender</label>
-          <Select
-            value={formData.gender.map((value) =>
-              catGender.find((option) => option.value === value)
-            )}
-            name="gender"
-            options={catGender}
-            className="chosen-single"
-            classNamePrefix="select"
-            onChange={handleGenderChange} // Ensure this updates formData correctly
-          />
+          <label>Height</label>
+          <div className="row">
+            <div className="form-group col-lg-4 col-md-6">
+              <input
+                type="number"
+                name="heightFt"
+                value={formData.heightFt}
+                onChange={handleHeightChange} // Using the new function
+                min="0"
+                max="7"
+                required
+              />
+            </div>ft
+            <div className="form-group col-lg-4 col-md-6">
+              <input
+                type="number"
+                name="heightInch"
+                value={formData.heightInch}
+                onChange={handleHeightChange} // Using the new function
+                min="0"
+                max="11"
+                required
+              />
+            </div>inch
+          </div>
         </div>
 
-        {/* Gender */}
-        <div className="form-group col-lg-4 col-md-12">
-          <label>Gender</label>
-          <Select
-            value={formData.gender.map((value) =>
-              catGender.find((option) => option.value === value)
-            )}
-            name="gender"
-            options={catGender}
-            className="chosen-single"
-            classNamePrefix="select"
-            onChange={handleGenderChange} // Ensure this updates formData correctly
+
+        <div className="form-group col-lg-3 col-md-12">
+          <label>Weight (kg)</label>
+          <input
+            type="number"
+            name="weight"
+            placeholder="Enter weight in kg"
+            value={formData.weight}
+            onChange={handleWeightChange} // Using the new function
+            min="30"
+            max="200"
+            step="0.1"
+            required
           />
         </div>
 
