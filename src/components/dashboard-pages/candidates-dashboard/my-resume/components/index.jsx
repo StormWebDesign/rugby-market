@@ -2,11 +2,11 @@
 
 
 
-import AddPortfolio from "./AddPortfolio";
-import Awards from "./Awards";
 import Education from "./Education";
 import Experiences from "./Experiences";
-import SkillsMultiple from "./SkillsMultiple";
+// import AddPortfolio from "./AddPortfolio";
+// import Awards from "./Awards";
+// import SkillsMultiple from "./SkillsMultiple";
 
 const index = () => {
   const handleSubmit = (event) => {
@@ -39,21 +39,20 @@ const index = () => {
         </div>
         {/* <!--  education and word-experiences --> */}
 
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <AddPortfolio />
-        </div>
+        </div> */}
         {/* <!-- End more portfolio upload --> */}
 
-        <div className="form-group col-lg-12 col-md-12">
-          {/* <!-- Resume / Awards --> */}
+        {/* <div className="form-group col-lg-12 col-md-12">
           <Awards />
-        </div>
+        </div> */}
         {/* <!-- End Award --> */}
 
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>Skills </label>
           <SkillsMultiple />
-        </div>
+        </div> */}
         {/* <!-- Multi Selectbox --> */}
 
         <div className="form-group col-lg-12 col-md-12">
