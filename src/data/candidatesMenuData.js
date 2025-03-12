@@ -62,13 +62,13 @@ const candidateMenus = [
     routePath: "/candidates-dashboard/short-listed-jobs",
     active: "",
   },
-  {
-    id: 10,
-    name: "Packages",
-    icon: "la-box",
-    routePath: "/candidates-dashboard/packages",
-    active: "",
-  },
+  // {
+  //   id: 10,
+  //   name: "Packages",
+  //   icon: "la-box",
+  //   routePath: "/candidates-dashboard/packages",
+  //   active: "",
+  // },
   {
     id: 11,
     name: "Messages",
@@ -90,12 +90,12 @@ const candidateMenus = [
     routePath: "/login",
     active: "",
   },
-  {
-    id: 14,
-    name: "Delete Profile",
-    icon: "la-trash",
-    routePath: "/",
-    active: "",
-  },
+  // {
+  //   id: 14,
+  //   name: "Delete Profile",
+  //   icon: "la-trash",
+  //   routePath: "/",
+  //   active: "",
+  // },
 ];
 export default  candidateMenus
