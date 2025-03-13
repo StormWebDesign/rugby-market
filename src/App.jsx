@@ -81,6 +81,7 @@ import DashboardEmploeeDBPage from "./pages/employers-dashboard/dashboard";
 import CompanyProfileEmploeeDBPage from "./pages/employers-dashboard/company-profile";
 import PostJobsEmploeeDBPage from "./pages/employers-dashboard/post-jobs";
 import ManageJobsEmploeeDBPage from "./pages/employers-dashboard/manage-jobs";
+import EditJobPage from "./pages/employers-dashboard/edit-job"; // Import the Edit Job page
 import AllApplicantsEmploeesPage from "./pages/employers-dashboard/all-applicants";
 import ShortListedResumeEmploeeDBPage from "./pages/employers-dashboard/shortlisted-resumes";
 import PackageEmploeeDBPage from "./pages/employers-dashboard/packages";
@@ -201,6 +202,7 @@ function App() {
                     <Route path="company-profile" element={<CompanyProfileEmploeeDBPage/>} />
                     <Route path="post-jobs" element={<PostJobsEmploeeDBPage/>} />
                     <Route path="manage-jobs" element={<ManageJobsEmploeeDBPage/>} />
+                    <Route path="edit-job/:jobId" element={<EditJobPage />} />
                     <Route path="all-applicants" element={<AllApplicantsEmploeesPage/>} />
                     <Route path="shortlisted-resumes" element={<ShortListedResumeEmploeeDBPage/>} />
                     <Route path="packages" element={<PackageEmploeeDBPage/>} />

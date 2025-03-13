@@ -9,6 +9,7 @@ import { catPositions } from "@/data/positions";
 import { catTypes } from "@/data/rugbyTypes";
 import { catGender } from "@/data/genders";
 import { rugbyCountries } from "@/data/countries";
+import { catRates } from "@/data/rates";
 
 const PostBoxForm = () => {
   const [formData, setFormData] = useState({
@@ -20,6 +21,7 @@ const PostBoxForm = () => {
     positions: [],
     rugbyType: [],
     offeredSalary: "",
+    rates: [],
     gender: [],
     applicationDeadlineDate: "",
     city: "",
@@ -53,6 +55,7 @@ const PostBoxForm = () => {
             positions: userData.positions || [],
             rugbyType: userData.rugbyType || [],
             gender: userData.gender || [],
+            rates: userData.rates || [],
           }));
         } else {
           console.error("No user data found in Firestore.");
@@ -87,6 +90,13 @@ const PostBoxForm = () => {
     }));
   };
 
+  const handleRateChange = (selectedOption) => {
+    const newValue = Array.isArray(selectedOption)
+      ? selectedOption.map((option) => option.value)
+      : [selectedOption.value];
+    setFormData((prevData) => ({ ...prevData, rates: newValue }));
+  };
+
   const handleGenderChange = (selectedOption) => {
     const newValue = Array.isArray(selectedOption)
       ? selectedOption.map((option) => option.value)
@@ -97,14 +107,13 @@ const PostBoxForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Basic input validation
     if (
       !formData.jobTitle ||
       !formData.jobDescription ||
       !formData.jobResponsibilities ||
       !formData.jobExperience ||
       !formData.email ||
-      !formData.city ||
+      !formData.positions ||
       !formData.country
     ) {
       setErrorMessage("Please fill in all required fields.");
@@ -122,7 +131,6 @@ const PostBoxForm = () => {
         return;
       }
 
-      // Fetch the club name from the user's Firestore document
       const userDocRef = doc(db, "users", user.uid);
       const userDoc = await getDoc(userDocRef);
       const userData = userDoc.data();
@@ -133,20 +141,20 @@ const PostBoxForm = () => {
         jobDescription: formData.jobDescription,
         jobResponsibilities: formData.jobResponsibilities,
         jobExperience: formData.jobExperience,
-        email: formData.email,
-        ownerEmail: user.email, // Use user.email for the creator
-        clubName: userData?.clubName || "Unknown", // Default to "Unknown" if clubName is not available
+        email: formData.email, // Keep for reference but not for linking
+        userId: user.uid, // New field for permanent linking
+        clubName: userData?.clubName || "Unknown",
         positions: formData.positions,
         rugbyType: formData.rugbyType,
         offeredSalary: formData.offeredSalary,
+        rates: formData.rates,
         gender: formData.gender,
         city: formData.city,
         country: formData.country,
         fullAddress: formData.fullAddress,
-        timestamp: Timestamp.fromDate(new Date()), // Add the timestamp of job creation
+        timestamp: Timestamp.fromDate(new Date()),
       };
 
-      // Create a new document in the "jobs" collection
       await addDoc(collection(db, "jobs"), jobData);
 
       setSuccessMessage("The job has been created successfully!");
@@ -159,6 +167,7 @@ const PostBoxForm = () => {
       setLoading(false);
     }
   };
+
 
   if (isFetching) {
     return <p>Loading profile data...</p>;
@@ -245,7 +254,7 @@ const PostBoxForm = () => {
         </div>
 
         {/* Rugby Type */}
-        <div className="form-group col-lg-6 col-md-12">
+        <div className="form-group col-lg-3 col-md-12">
           <label>Type of Rugby</label>
           <Select
             value={formData.rugbyType.map((value) =>
@@ -261,7 +270,7 @@ const PostBoxForm = () => {
         </div>
 
         {/* <!-- Offered Salary --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        <div className="form-group col-lg-3 col-md-12">
           <label>Offered Salary</label>
           <input
             type="number"
@@ -271,8 +280,23 @@ const PostBoxForm = () => {
           />
         </div>
 
+        {/* Rate */}
+        <div className="form-group col-lg-3 col-md-12">
+          <label>Rate</label>
+          <Select
+            value={formData.rates.map((value) =>
+              catRates.find((option) => option.value === value)
+            )}
+            name="rates"
+            options={catRates}
+            className="basic-multi-select"
+            classNamePrefix="select"
+            onChange={handleRateChange}
+          />
+        </div>
+
         {/* Gender */}
-        <div className="form-group col-lg-4 col-md-12">
+        <div className="form-group col-lg-3 col-md-12">
           <label>Gender</label>
           <Select
             value={formData.gender.map((value) =>
@@ -287,8 +311,19 @@ const PostBoxForm = () => {
           />
         </div>
 
+        {/* <!-- Input --> */}
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Full Address</label>
+          <input
+            type="text"
+            name="fullAddress"
+            onChange={handleInputChange}
+            placeholder="Enter the full address of this job"
+          />
+        </div>
+
         {/* City Input */}
-        <div className="form-group col-lg-4 col-md-12">
+        <div className="form-group col-lg-3 col-md-12">
           <label>City</label>
           <input
             type="text"
@@ -299,7 +334,7 @@ const PostBoxForm = () => {
         </div>
 
         {/* Country Dropdown */}
-        <div className="form-group col-lg-4 col-md-12">
+        <div className="form-group col-lg-3 col-md-12">
           <label>Country *</label>
           <select
             className="form-select"
@@ -313,17 +348,6 @@ const PostBoxForm = () => {
               </option>
             ))}
           </select>
-        </div>
-
-        {/* <!-- Input --> */}
-        <div className="form-group col-lg-12 col-md-12">
-          <label>Full Address</label>
-          <input
-            type="text"
-            name="fullAddress"
-            onChange={handleInputChange}
-            placeholder="Enter the full address of this job"
-          />
         </div>
 
         {/* Submit Button */}
