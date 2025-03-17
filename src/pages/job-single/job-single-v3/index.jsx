@@ -115,7 +115,7 @@ const JobSingleDynamicV3 = () => {
                   <JobOverView2 />
                 </div>
 
-                <JobDetailsDescriptions />
+                <JobDetailsDescriptions job={job} />
 
                 <div className="other-options">
                   <div className="social-share">
