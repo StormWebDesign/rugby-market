@@ -8,7 +8,7 @@ const CompanyInfo = ({ company }) => {
         Club Name: <span>{company?.clubName || "Not Provided"}</span>
       </li>
       <li>
-        Primary industry: <span>{company?.industry || "Not Provided"}</span>
+        Rugby Played: <span>{company?.rugbyType || "Not Provided"}</span>
       </li>
       <li>
         Company size: <span>{company?.size || "Not Provided"}</span>
@@ -23,10 +23,10 @@ const CompanyInfo = ({ company }) => {
         Email: <span>{company?.email || "Not Provided"}</span>
       </li>
       <li>
-        Location: <span>{company?.location || "Not Provided"}</span>
+        Location: <span>{company?.city || "Not Provided"}, {company?.country || "Not Provided"}</span>
       </li>
       <li>
-        Social media: <Social />
+        Social media: <Social company={company} />
       </li>
     </ul>
   );

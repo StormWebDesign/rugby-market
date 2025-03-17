@@ -90,7 +90,7 @@ const JobListingsTable = () => {
                       <div className="job-block">
                         <div className="inner-box">
                           <h4>
-                            <Link to={`/job-single-v3/${item.id}`}>{item.jobTitle}</Link>
+                            <Link to={`/job-listings/${item.id}`}>{item.jobTitle}</Link>
                           </h4>
                         </div>
                       </div>
