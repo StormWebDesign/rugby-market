@@ -112,7 +112,7 @@ const JobSingleDynamicV3 = () => {
                 </div>
                 <div className="job-overview-two">
                   <h4>Job Description</h4>
-                  <JobOverView2 />
+                  <JobOverView2 job={job} />
                 </div>
 
                 <JobDetailsDescriptions job={job} />
@@ -168,12 +168,12 @@ const JobSingleDynamicV3 = () => {
                         <div className="company-title">
                           <div className="company-logo">
                             <img
-                              src={companyData.logo}
-                              alt={companyData.company}
+                              src={companyData.club_logoImageURL}
+                              alt={companyData.clubName}
                             />
                           </div>
                           <h5 className="company-name">
-                            {companyData.company}
+                            {companyData.clubName}
                           </h5>
                           <a href="#" className="profile-link">
                             View company profile

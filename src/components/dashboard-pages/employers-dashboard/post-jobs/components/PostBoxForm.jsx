@@ -10,6 +10,7 @@ import { catTypes } from "@/data/rugbyTypes";
 import { catGender } from "@/data/genders";
 import { rugbyCountries } from "@/data/countries";
 import { catRates } from "@/data/rates";
+import { localCurrency } from "@/data/currency";
 
 const PostBoxForm = () => {
   const [formData, setFormData] = useState({
@@ -23,6 +24,7 @@ const PostBoxForm = () => {
     offeredSalary: "",
     rates: [],
     gender: [],
+    currency: [],
     applicationDeadlineDate: "",
     city: "",
     country: "",
@@ -56,6 +58,7 @@ const PostBoxForm = () => {
             rugbyType: userData.rugbyType || [],
             gender: userData.gender || [],
             rates: userData.rates || [],
+            currency: userData.currency || [],
           }));
         } else {
           console.error("No user data found in Firestore.");
@@ -95,6 +98,13 @@ const PostBoxForm = () => {
       ? selectedOption.map((option) => option.value)
       : [selectedOption.value];
     setFormData((prevData) => ({ ...prevData, rates: newValue }));
+  };
+
+  const handleCurrencyChange = (selectedOption) => {
+    const newValue = Array.isArray(selectedOption)
+      ? selectedOption.map((option) => option.value)
+      : [selectedOption.value];
+    setFormData((prevData) => ({ ...prevData, currency: newValue }));
   };
 
   const handleGenderChange = (selectedOption) => {
@@ -149,6 +159,7 @@ const PostBoxForm = () => {
         offeredSalary: formData.offeredSalary,
         rates: formData.rates,
         gender: formData.gender,
+        currency: formData.currency,
         city: formData.city,
         country: formData.country,
         fullAddress: formData.fullAddress,
@@ -269,8 +280,24 @@ const PostBoxForm = () => {
           />
         </div>
 
+        
+        {/* Currency */}
+        <div className="form-group col-lg-1 col-md-12">
+          <label>Currency</label>
+          <Select
+            value={formData.currency.map((value) =>
+              localCurrency.find((option) => option.value === value)
+            )}
+            name="rates"
+            options={localCurrency}
+            className="basic-multi-select"
+            classNamePrefix="select"
+            onChange={handleCurrencyChange}
+          />
+        </div>
+
         {/* <!-- Offered Salary --> */}
-        <div className="form-group col-lg-3 col-md-12">
+        <div className="form-group col-lg-2 col-md-12">
           <label>Offered Salary</label>
           <input
             type="number"

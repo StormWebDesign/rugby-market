@@ -10,6 +10,7 @@ import { catTypes } from "@/data/rugbyTypes";
 import { catGender } from "@/data/genders";
 import { rugbyCountries } from "@/data/countries";
 import { catRates } from "@/data/rates";
+import { localCurrency } from "@/data/currency";
 
 const EditJobForm = ({ jobId }) => {
     const [formData, setFormData] = useState(null);
@@ -63,6 +64,13 @@ const EditJobForm = ({ jobId }) => {
             ? selectedOption.map((option) => option.value)
             : [selectedOption.value];
         setFormData((prevData) => ({ ...prevData, rates: newValue }));
+    };
+
+    const handleCurrencyChange = (selectedOption) => {
+        const newValue = Array.isArray(selectedOption)
+            ? selectedOption.map((option) => option.value)
+            : [selectedOption.value];
+        setFormData((prevData) => ({ ...prevData, currency: newValue }));
     };
 
     const handleGenderChange = (selectedOption) => {
@@ -182,6 +190,23 @@ const EditJobForm = ({ jobId }) => {
                         className="basic-multi-select"
                         classNamePrefix="select"
                         onChange={handleTypeChange}
+                    />
+                </div>
+
+
+
+                {/* Currency */}
+                <div className="form-group col-lg-3 col-md-12">
+                    <label>Currency</label>
+                    <Select
+                        value={(formData.currency || []).map((value) =>
+                            localCurrency.find((option) => option.value === value)
+                        )}
+                        name="currency"
+                        options={localCurrency}
+                        className="basic-multi-select"
+                        classNamePrefix="select"
+                        onChange={handleCurrencyChange}
                     />
                 </div>
 

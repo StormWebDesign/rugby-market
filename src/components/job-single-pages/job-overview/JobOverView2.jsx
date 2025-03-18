@@ -1,4 +1,4 @@
-const JobOverView2 = () => {
+const JobOverView2 = ({ job }) => {
   return (
     <ul>
       <li>
@@ -29,7 +29,7 @@ const JobOverView2 = () => {
       <li>
         <i className="icon icon-rate"></i>
         <h5>Rate:</h5>
-        <span>$15 - $25 / hour</span>
+        <span>{job.offeredSalary} {job.rates}</span>
       </li>
       <li>
         <i className="icon icon-salary"></i>
