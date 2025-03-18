@@ -17,3 +17,18 @@
                 color: #34a853;
         }
 }
+
+.loading-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100px; // Adjust as needed
+        color: #007bff; // Bootstrap primary color
+        font-size: 1.2rem;
+}
+
+.loading-spinner {
+        margin-bottom: 10px;
+        color: #007bff; // Blue spinner
+}

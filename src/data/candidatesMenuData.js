@@ -42,6 +42,13 @@ const candidateMenus = [
     active: "",
   },
   {
+    id: 14,
+    name: "Job Search",
+    icon: "la-briefcase",
+    routePath: "/job-listings",
+    active: "",
+  },
+  {
     id: 7,
     name: "Applied Jobs",
     icon: "la-briefcase",

@@ -1,30 +1,29 @@
-
-
-
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addKeyword } from "../../../features/filter/filterSlice";
 
 const SearchBox = () => {
     const { jobList } = useSelector((state) => state.filter);
-    const [getKeyWord, setkeyWord] = useState(jobList.keyword);
-    const dispath = useDispatch();
+    const [getKeyWord, setKeyWord] = useState(jobList.keyword || "");
+    const dispatch = useDispatch();
 
-    // keyword handler
+    // Keyword handler
     const keywordHandler = (e) => {
-        dispath(addKeyword(e.target.value));
+        const value = e.target.value;
+        setKeyWord(value);
+        dispatch(addKeyword(value));
     };
 
     useEffect(() => {
-        setkeyWord(jobList.keyword);
-    }, [setkeyWord, jobList]);
+        setKeyWord(jobList.keyword || "");
+    }, [jobList]);
 
     return (
         <>
             <input
                 type="text"
                 name="listing-search"
-                placeholder="Job title, keywords, or company"
+                placeholder="Job title, keywords, or club name"
                 value={getKeyWord}
                 onChange={keywordHandler}
             />

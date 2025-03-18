@@ -32,19 +32,19 @@ import Home from "./pages";
 // import HomePage16 from "./pages/home/home-16";
 // import HomePage17 from "./pages/home/home-17";
 import JobListPage1 from "./pages/job-list/job-list-v1";
-import JobListPage2 from "./pages/job-list/job-list-v2";
-import JobListPage3 from "./pages/job-list/job-list-v3";
-import JobListPage4 from "./pages/job-list/job-list-v4";
-import JobListPage5 from "./pages/job-list/job-list-v5";
-import JobListPage6 from "./pages/job-list/job-list-v6";
-import JobListPage7 from "./pages/job-list/job-list-v7";
-import JobListPage8 from "./pages/job-list/job-list-v8";
-import JobListPage9 from "./pages/job-list/job-list-v9";
-import JobListPage10 from "./pages/job-list/job-list-v10";
-import JobListPage11 from "./pages/job-list/job-list-v11";
-import JobListPage12 from "./pages/job-list/job-list-v12";
-import JobListPage13 from "./pages/job-list/job-list-v13";
-import JobListPage14 from "./pages/job-list/job-list-v14";
+// import JobListPage2 from "./pages/job-list/job-list-v2";
+// import JobListPage3 from "./pages/job-list/job-list-v3";
+// import JobListPage4 from "./pages/job-list/job-list-v4";
+// import JobListPage5 from "./pages/job-list/job-list-v5";
+// import JobListPage6 from "./pages/job-list/job-list-v6";
+// import JobListPage7 from "./pages/job-list/job-list-v7";
+// import JobListPage8 from "./pages/job-list/job-list-v8";
+// import JobListPage9 from "./pages/job-list/job-list-v9";
+// import JobListPage10 from "./pages/job-list/job-list-v10";
+// import JobListPage11 from "./pages/job-list/job-list-v11";
+// import JobListPage12 from "./pages/job-list/job-list-v12";
+// import JobListPage13 from "./pages/job-list/job-list-v13";
+// import JobListPage14 from "./pages/job-list/job-list-v14";
 import JobSingleDynamicV1 from "./pages/job-single/job-single-v1";
 import JobSingleDynamicV2 from "./pages/job-single/job-single-v2";
 import JobSingleDynamicV3 from "./pages/job-single/job-single-v3";
@@ -100,6 +100,7 @@ import MyRugbyCareerPage from "./pages/candidates-dashboard/my-rugby-career";
 import MyImagesPage from "./pages/candidates-dashboard/my-images";
 import PackagePage from "./pages/candidates-dashboard/packages";
 import ShortListedJobsPage from "./pages/candidates-dashboard/short-listed-jobs";
+import ApplyJob from "./pages/apply-job";
 import LoginPage from "./pages/others/login";
 import RegisterPage from "./pages/others/register";
 import ShopListPage from "./pages/shop/shop-list";
@@ -142,8 +143,8 @@ function App() {
                   <Route path="home-16" element={<HomePage16 />} />
                   <Route path="home-17" element={<HomePage17 />} /> */}
 
-                  <Route path="job-list-v1" element={<JobListPage1 />} />
-                  <Route path="job-list-v2" element={<JobListPage2 />} />
+                  <Route path="job-listings" element={<JobListPage1 />} />
+                  {/* <Route path="job-list-v2" element={<JobListPage2 />} />
                   <Route path="job-list-v3" element={<JobListPage3 />} />
                   <Route path="job-list-v4" element={<JobListPage4 />} />
                   <Route path="job-list-v5" element={<JobListPage5 />} />
@@ -155,7 +156,7 @@ function App() {
                   <Route path="job-list-v11" element={<JobListPage11 />} />
                   <Route path="job-list-v12" element={<JobListPage12 />} />
                   <Route path="job-list-v13" element={<JobListPage13 />} />
-                  <Route path="job-list-v14" element={<JobListPage14 />} />
+                  <Route path="job-list-v14" element={<JobListPage14 />} /> */}
                   {/* <Route path="job-single-v1/:id" element={<JobSingleDynamicV1 />} /> */}
                   {/* <Route path="job-single-v2/:id" element={<JobSingleDynamicV2 />} /> */}
                   {/* <Route path="job-single-v3/:id" element={<JobSingleDynamicV3 />} /> */}
@@ -187,6 +188,8 @@ function App() {
                   <Route path="blog-list-v3" element={<BlogListpage3 />} />
                   <Route path="blog-details/:id" element={<BlogDetailsDynamic />} />
 
+                  <Route path="apply-job/:id" element={<ApplyJob />} />
+                  
                   <Route path="about" element={<AboutPage />} />
                   <Route path="pricing" element={<PricingPage />} />
                   <Route path="faq" element={<FaqPage />} />

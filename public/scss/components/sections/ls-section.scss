@@ -300,6 +300,7 @@ Listing Section  (Ls Section)
   transition: 0.3s;
 }
 
+.tags-style-one li.active,
 .tags-style-one li:hover {
   background: #d4e1f6;
   color: var(--primary-color);

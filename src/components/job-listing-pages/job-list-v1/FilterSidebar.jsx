@@ -1,17 +1,15 @@
-
-
-
 import { useState } from "react";
 import CallToActions from "../components/CallToActions";
-import Categories from "../components/Categories";
+import RugbyTypes from "../components/RugbyTypes"; // New component for Rugby Types
+import GenderFilter from "../components/GenderFilter"; // New component for Gender
+import PositionFilter from "../components/PositionFilter"; // New component for Positions
 import DatePosted from "../components/DatePosted";
-import DestinationRangeSlider from "../components/DestinationRangeSlider";
-import ExperienceLevel from "../components/ExperienceLevel";
-import JobType from "../components/JobType";
+// import DestinationRangeSlider from "../components/DestinationRangeSlider";
+// import ExperienceLevel from "../components/ExperienceLevel";
+// import JobType from "../components/JobType";
 import LocationBox from "../components/LocationBox";
-import SalaryRangeSlider from "../components/SalaryRangeSlider";
+// import SalaryRangeSlider from "../components/SalaryRangeSlider";
 import SearchBox from "../components/SearchBox";
-import Tag from "../components/Tag";
 
 const FilterSidebar = () => {
   return (
@@ -23,7 +21,6 @@ const FilterSidebar = () => {
           data-bs-dismiss="offcanvas"
           aria-label="Close"
         ></button>
-        {/* End .close filter */}
 
         <div className="filter-block">
           <h4>Search by Keywords</h4>
@@ -31,7 +28,6 @@ const FilterSidebar = () => {
             <SearchBox />
           </div>
         </div>
-        {/* <!-- Filter Block --> */}
 
         <div className="filter-block">
           <h4>Location</h4>
@@ -39,54 +35,53 @@ const FilterSidebar = () => {
             <LocationBox />
           </div>
 
-          <p>Radius around selected destination</p>
-          <DestinationRangeSlider />
+          {/* <p>Radius around selected destination</p>
+          <DestinationRangeSlider /> */}
         </div>
-        {/* <!-- Filter Block --> */}
 
         <div className="filter-block">
-          <h4>Category</h4>
+          <h4>Rugby Type</h4>
           <div className="form-group">
-            <Categories />
+            <RugbyTypes />
           </div>
         </div>
-        {/* <!-- Filter Block --> */}
 
-        <div className="switchbox-outer">
-          <h4>Job type</h4>
+        {/* <div className="switchbox-outer">
+          <h4>Job Type</h4>
           <JobType />
-        </div>
-        {/* <!-- Switchbox Outer --> */}
+        </div> */}
 
         <div className="checkbox-outer">
           <h4>Date Posted</h4>
           <DatePosted />
         </div>
-        {/* <!-- Checkboxes Ouer --> */}
 
-        <div className="checkbox-outer">
+        {/* <div className="checkbox-outer">
           <h4>Experience Level</h4>
           <ExperienceLevel />
-        </div>
-        {/* <!-- Checkboxes Ouer --> */}
+        </div> */}
 
-        <div className="filter-block">
+        {/* <div className="filter-block">
           <h4>Salary</h4>
-
           <SalaryRangeSlider />
-        </div>
-        {/* <!-- Filter Block --> */}
+        </div> */}
 
         <div className="filter-block">
-          <h4>Tags</h4>
-          <Tag />
+          <h4>Gender</h4>
+          <div className="form-group">
+            <GenderFilter />
+          </div>
         </div>
-        {/* <!-- Filter Block --> */}
+
+        <div className="filter-block">
+          <h4>Position</h4>
+          <div className="form-group">
+            <PositionFilter />
+          </div>
+        </div>
       </div>
-      {/* Filter Outer */}
 
       <CallToActions />
-      {/* <!-- End Call To Action --> */}
     </div>
   );
 };

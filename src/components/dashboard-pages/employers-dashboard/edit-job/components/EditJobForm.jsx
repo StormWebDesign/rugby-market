@@ -151,7 +151,7 @@ const EditJobForm = ({ jobId }) => {
                 </div>
 
                 {/* <!-- Input --> */}
-                <div className="form-group col-lg-6 col-md-12">
+                <div className="form-group col-lg-4 col-md-12">
                     <label>Email Address *</label>
                     <input
                         type="email"
@@ -162,7 +162,7 @@ const EditJobForm = ({ jobId }) => {
                 </div>
 
                 {/* positions */}
-                <div className="form-group col-lg-6 col-md-12">
+                <div className="form-group col-lg-4 col-md-12">
                     <label>Playing Position(s) Wanted</label>
                     <Select
                         value={formData.positions.map((value) =>
@@ -178,7 +178,7 @@ const EditJobForm = ({ jobId }) => {
                 </div>
 
                 {/* Rugby Type */}
-                <div className="form-group col-lg-6 col-md-12">
+                <div className="form-group col-lg-4 col-md-12">
                     <label>Type of Rugby</label>
                     <Select
                         value={formData.rugbyType.map((value) =>
@@ -196,7 +196,7 @@ const EditJobForm = ({ jobId }) => {
 
 
                 {/* Currency */}
-                <div className="form-group col-lg-3 col-md-12">
+                <div className="form-group col-lg-2 col-md-6">
                     <label>Currency</label>
                     <Select
                         value={(formData.currency || []).map((value) =>
@@ -211,7 +211,7 @@ const EditJobForm = ({ jobId }) => {
                 </div>
 
                 {/* <!-- Offered Salary --> */}
-                <div className="form-group col-lg-6 col-md-12">
+                <div className="form-group col-lg-3 col-md-6">
                     <label>Offered Salary</label>
                     <input
                         type="number"
@@ -253,6 +253,17 @@ const EditJobForm = ({ jobId }) => {
                     />
                 </div>
 
+                {/* <!-- Input --> */}
+                <div className="form-group col-lg-4 col-md-12">
+                    <label>Full Address</label>
+                    <input
+                        type="text"
+                        name="fullAddress"
+                        onChange={handleInputChange}
+                        placeholder="Enter the full address of this job"
+                    />
+                </div>
+
                 {/* City Input */}
                 <div className="form-group col-lg-4 col-md-12">
                     <label>City</label>
@@ -279,17 +290,6 @@ const EditJobForm = ({ jobId }) => {
                             </option>
                         ))}
                     </select>
-                </div>
-
-                {/* <!-- Input --> */}
-                <div className="form-group col-lg-12 col-md-12">
-                    <label>Full Address</label>
-                    <input
-                        type="text"
-                        name="fullAddress"
-                        onChange={handleInputChange}
-                        placeholder="Enter the full address of this job"
-                    />
                 </div>
 
 

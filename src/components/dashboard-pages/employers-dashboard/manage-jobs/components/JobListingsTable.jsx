@@ -106,7 +106,7 @@ const JobListingsTable = () => {
                         <ul className="option-list">
                           <li>
                             <button data-text="View Job">
-                              <span className="la la-eye"></span>
+                            <Link to={`/job-listings/${item.id}`}><span className="la la-eye"></span></Link>
                             </button>
                           </li>
                           <li>
