@@ -211,7 +211,7 @@ const FormInfoBox = () => {
         </div>
 
         {/* Height */}
-        <div className="form-group col-lg-4 col-md-12">
+        <div className="form-group col-lg-3 col-md-12">
           <label>Height</label>
           <div className="row">
             <div className="form-group col-lg-4 col-md-6">
@@ -253,7 +253,7 @@ const FormInfoBox = () => {
             step="0.1"
             required
           />
-        </div>
+        </div>        
 
         {/* Description */}
         <div className="form-group col-lg-12 col-md-12">

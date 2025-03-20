@@ -178,7 +178,7 @@ const LogoUpload = () => {
                     <img
                         src={uploadedImgUrl}
                         alt="Uploaded Profile"
-                        className="uploaded-image"
+                        className="portrait-circle"
                     />
                     <button
                         className="theme-btn btn btn-style btn-danger"

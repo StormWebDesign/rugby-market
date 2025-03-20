@@ -32,3 +32,8 @@
         margin-bottom: 10px;
         color: #007bff; // Blue spinner
 }
+
+.portrait-circle {
+        border-radius: 50%;
+        object-fit: cover;
+}
