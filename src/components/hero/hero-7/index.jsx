@@ -6,6 +6,7 @@ import CountUp from 'react-countup';
 import SearchForm from "../../common/job-search/SearchForm";
 import PopularSearch from "../PopularSearch";
 import Partner from "../../common/partner/Partner";
+import HeroImage from "@/components/common/HeroImage";
 
 const Index = () => {
   const [jobCount, setJobCount] = useState(0);
@@ -41,14 +42,10 @@ const Index = () => {
 
     fetchCounts();
   }, []);
-  
+
   return (
     <section className="banner-section-seven">
-      <div className="image-outer" data-aos="fade-in" data-aos-delay="300">
-        <figure className="image">
-          <img src="/images/resource/banner-img-8.png" alt="hero banner" />
-        </figure>
-      </div>
+      <HeroImage />
       {/* End image-outer */}
 
       <div className="auto-container">

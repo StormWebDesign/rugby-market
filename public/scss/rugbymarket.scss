@@ -37,3 +37,7 @@
         border-radius: 50%;
         object-fit: cover;
 }
+
+.shape {
+        clip-path: polygon(0 0, 100% 0%, 100% 100%, 50% 100%);
+}
