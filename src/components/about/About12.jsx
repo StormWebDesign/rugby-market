@@ -12,9 +12,10 @@ const About12 = () => {
               <div className="image-box -type-1">
                 <figure className="main-image" data-aos="fade-left">
                   <img
-                    
-                    src="/images/index-14/images/2.png"
+
+                    src="/images/hero/homepage/IMG-20250228-WA0006-resized.jpg"
                     alt="image"
+                    className="portrait-circle"
                   />
                 </figure>
               </div>
@@ -25,15 +26,27 @@ const About12 = () => {
               <div data-aos="fade-right">
                 <div className="sec-title mb-0">
                   <h2 className="fw-700">
-                    <span className="text-orange">Find</span> Your
-                    <br /> Perfect Job
+                    <span className="text-orange">Connecting</span>
+                    <br />  Players and Clubs Worldwide
                   </h2>
-                  <div className="text mt-30">
-                    To start searching for jobs, you can attend job fairs online
-                    or in person, use job boards and career websites or reach
-                    out directly to recruiters in a targeted company to broaden
-                    your network.
+                  <div className="mt-30 lead-text">
+                    Whether you're a <span className="fw-700">rugby player looking for new opportunities</span> or a <span className="fw-700">club seeking top talent</span>, The Rugby Transfer Market is your go-to platform.
+                    Create a profile, showcase your skills, post or apply for positions, and take your rugby career to the next level.
                   </div>
+                  <div className="mt-30 lead-text">
+                    Create a profile, showcase your skills, post or apply for positions, and take your rugby career to the next level.
+                  </div>
+                  <div className="mt-30 lead-text">
+                    <span className="fw-700">
+                    For Players</span>: Build your online rugby CV and apply directly to club vacancies.
+                  </div>
+                  <div className="lead-text">
+                    <span className="fw-700">
+                    For Clubs</span>: Post jobs, scout talent, and find the perfect match for your squad.
+                  </div>
+                  <h2 className="mt-30 fw-700">
+                    Join today – it’s free to get started!
+                  </h2>
                 </div>
                 <Link
                   to="/job-list-v12"

@@ -54,8 +54,8 @@ const Index = () => {
             <div className="inner-column">
               <div
                 className="title-box"
-                data-aos="fade-up"
-                data-aos-delay="500"
+                // data-aos="fade-up"
+                // data-aos-delay="500"
               >
                 <h3>
                   There Are <span className="colored"><CountUp end={jobCount} /></span> <br />{" "}
@@ -74,21 +74,21 @@ const Index = () => {
               {/* Job Search Form */}
               <div
                 className="job-search-form"
-                data-aos="fade-up"
-                data-aos-delay="700"
+                // data-aos="fade-up"
+                // data-aos-delay="700"
               >
                 <SearchForm />
               </div>
               {/* End Job Search Form */}
 
               {/* Popular Search */}
-              <PopularSearch />
+              {/* <PopularSearch /> */}
               {/* End Popular Search */}
 
               <div
                 className="clients-section-two"
-                data-aos="fade-up"
-                data-aos-delay="1300"
+                // data-aos="fade-up"
+                // data-aos-delay="1300"
               >
                 <Partner />
               </div>

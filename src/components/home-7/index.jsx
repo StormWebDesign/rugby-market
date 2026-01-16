@@ -1,4 +1,4 @@
-import About4 from "../about/About4";
+import About12 from "../about/About12";
 import AddBlock from "../block/AddBlock";
 import Candidates2 from "../candidates/Candidates2";
 import FooterDefault from "../footer/common-footer";
@@ -48,21 +48,21 @@ const index = () => {
       <section className="about-section style-two">
         <div className="auto-container">
           <div className="row">
-            <About4 />
+            <About12 />
           </div>
 
           {/* <!-- Fun Fact Section --> */}
-          <div className="fun-fact-section">
+          {/* <div className="fun-fact-section">
             <div className="row">
               <Funfact />
             </div>
-          </div>
+          </div> */}
           {/* <!-- Fun Fact Section --> */}
         </div>
       </section>
       {/* <!-- End About Section --> */}
 
-      <section className="top-companies">
+      {/* <section className="top-companies">
         <div className="auto-container">
           <div className="sec-title">
             <h2>Top Company Registered</h2>
@@ -78,48 +78,48 @@ const index = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       {/* <!-- End Top Companies --> */}
 
-      <section className="testimonial-section-two style-two">
-        <div className="container-fluid">
-          <div className="testimonial-left">
-            <img
+      {/* <section className="testimonial-section-two style-two"> */}
+        {/* <div className="container-fluid"> */}
+          {/* <div className="testimonial-left"> */}
+            {/* <img */}
              
-              src="/images/resource/testimonial-left.png"
-              alt="testimonial"
-            />
-          </div>
+              {/* src="/images/resource/testimonial-left.png" */}
+              {/* alt="testimonial" */}
+            {/* /> */}
+          {/* </div> */}
           {/* End left img group */}
 
-          <div className="testimonial-right">
-            <img
+          {/* <div className="testimonial-right"> */}
+            {/* <img */}
              
-              src="/images/resource/testimonial-right.png"
-              alt="testimonial"
-            />
-          </div>
+              {/* src="/images/resource/testimonial-right.png" */}
+              {/* alt="testimonial" */}
+            {/* /> */}
+          {/* </div> */}
           {/* End right img group */}
 
-          <div className="sec-title text-center">
-            <h2>Testimonials From Our Customers</h2>
-            <div className="text">
-              Lorem ipsum dolor sit amet elit, sed do eiusmod tempor
-            </div>
-          </div>
+          {/* <div className="sec-title text-center"> */}
+            {/* <h2>Testimonials From Our Customers</h2> */}
+            {/* <div className="text"> */}
+              {/* Lorem ipsum dolor sit amet elit, sed do eiusmod tempor */}
+            {/* </div> */}
+          {/* </div> */}
           {/* <!-- Sec Title --> */}
 
-          <div className="carousel-outer" data-aos="fade-up">
-            <div className="testimonial-carousel">
-              <Testimonial2 />
-            </div>
+          {/* <div className="carousel-outer" data-aos="fade-up"> */}
+            {/* <div className="testimonial-carousel"> */}
+              {/* <Testimonial2 /> */}
+            {/* </div> */}
             {/* <!-- Testimonial Carousel --> */}
-          </div>
-        </div>
-      </section>
+          {/* </div> */}
+        {/* </div> */}
+      {/* </section> */}
       {/* <!-- End Testimonial Section --> */}
 
-      <section className="job-categories">
+      {/* <section className="job-categories">
         <div className="auto-container">
           <div className="sec-title text-center">
             <h2>Popular Job Categories</h2>
@@ -130,12 +130,12 @@ const index = () => {
             className="row "
             data-aos="fade-up"
             data-aos-anchor-placement="top-bottom"
-          >
+          > */}
             {/* <!-- Category Block --> */}
-            <JobCategorie1 />
-          </div>
+            {/* <JobCategorie1 /> */}
+          {/* </div>
         </div>
-      </section>
+      </section> */}
       {/* End Job Categorie Section */}
 
       <section className="job-section style-two">
@@ -153,7 +153,7 @@ const index = () => {
       </section>
       {/* <!-- End Job Section --> */}
 
-      <section className="candidates-section-two">
+      {/* <section className="candidates-section-two">
         <div className="auto-container">
           <div className="sec-title">
             <h2>Featured Candidates</h2>
@@ -166,7 +166,7 @@ const index = () => {
             <Candidates2 />
           </div>
         </div>
-      </section>
+      </section> */}
       {/* <!-- End Candidates Section --> */}
 
       <section className="ads-section">

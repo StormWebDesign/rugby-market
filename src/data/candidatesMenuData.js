@@ -55,13 +55,13 @@ const candidateMenus = [
     routePath: "/candidates-dashboard/applied-jobs",
     active: "",
   },
-  {
-    id: 8,
-    name: "Job Alerts",
-    icon: "la la-bell",
-    routePath: "/candidates-dashboard/job-alerts",
-    active: "",
-  },
+  // {
+  //   id: 8,
+  //   name: "Job Alerts",
+  //   icon: "la la-bell",
+  //   routePath: "/candidates-dashboard/job-alerts",
+  //   active: "",
+  // },
   {
     id: 9,
     name: "Shortlisted Jobs",

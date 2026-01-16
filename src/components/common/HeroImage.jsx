@@ -13,7 +13,8 @@ const HeroImage = () => {
   if (!randomImage) return null;
 
   return (
-    <div className="image-outer" data-aos="fade-in" data-aos-delay="300">
+    // <div className="image-outer" data-aos="fade-in" data-aos-delay="300">
+    <div className="image-outer">
       <figure className="image">
         <img
           src={randomImage.src}

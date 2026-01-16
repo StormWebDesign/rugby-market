@@ -41,13 +41,13 @@ const employerMenu = [
     routePath: "/employers-dashboard/shortlisted-resumes",
     active: "",
   },
-  {
-    id: 7,
-    name: "Packages",
-    icon: "la-box",
-    routePath: "/employers-dashboard/packages",
-    active: "",
-  },
+  // {
+  //   id: 7,
+  //   name: "Packages",
+  //   icon: "la-box",
+  //   routePath: "/employers-dashboard/packages",
+  //   active: "",
+  // },
   {
     id: 8,
     name: "Messages",
@@ -55,13 +55,13 @@ const employerMenu = [
     routePath: "/employers-dashboard/messages",
     active: "",
   },
-  {
-    id: 9,
-    name: "Resume Alerts",
-    icon: "la-bell",
-    routePath: "/employers-dashboard/resume-alerts",
-    active: "",
-  },
+  // {
+  //   id: 9,
+  //   name: "Resume Alerts",
+  //   icon: "la-bell",
+  //   routePath: "/employers-dashboard/resume-alerts",
+  //   active: "",
+  // },
   {
     id: 10,
     name: "Change Password",
@@ -76,12 +76,12 @@ const employerMenu = [
     routePath: "/login",
     active: "",
   },
-  {
-    id: 12,
-    name: "Delete Profile",
-    icon: "la-trash",
-    routePath: "/",
-    active: "",
-  },
+  // {
+  //   id: 12,
+  //   name: "Delete Profile",
+  //   icon: "la-trash",
+  //   routePath: "/",
+  //   active: "",
+  // },
 ];
 export default  employerMenu

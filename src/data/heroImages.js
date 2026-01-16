@@ -1,20 +1,35 @@
 // src/data/heroImages.js
+import { Cloudinary } from "@cloudinary/url-gen";
+import { auto } from "@cloudinary/url-gen/actions/resize";
+import { autoGravity } from "@cloudinary/url-gen/qualifiers/gravity";
+import { format, quality } from "@cloudinary/url-gen/actions/delivery";
 
-const heroImages = [
-    {
-      src: "/images/resource/banner-img-8.png",
-      alt: "hero banner 1",
-    },
-    {
-      src: "/images/resource/banner-img-9.png",
-      alt: "hero banner 2",
-    },
-    {
-      src: "/images/resource/banner-img-10.png",
-      alt: "hero banner 3",
-    },
-    // Add more images as needed
-  ];
-  
-  export default heroImages;
-  
+const cld = new Cloudinary({
+  cloud: {
+    cloudName: "storm-web-design",
+  },
+});
+
+const imagePublicIds = [
+  // "rugby-market/hero/IMG-20250228-WA0006",
+  "rugby-market/hero/IMG-20250310-WA0006",
+  "rugby-market/hero/IMG-20250228-WA0014",
+  "rugby-market/hero/IMG-20250228-WA0023",
+];
+
+const heroImages = imagePublicIds.map((publicId, index) => {
+  const img = cld.image(publicId);
+
+  img
+    .resize(auto().gravity(autoGravity()))
+    .delivery(format("auto"))
+    .delivery(quality("auto"))
+    .delivery("dpr_auto"); // ✅ works as intended
+
+  return {
+    src: img.toURL(),
+    alt: `Rugby Jobs Hero Banner ${index + 1}`,
+  };
+});
+
+export default heroImages;
