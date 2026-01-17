@@ -69,7 +69,7 @@ const CvUploader = () => {
         for (const file of selectedFiles) {
             try {
                 // Upload file to Firebase Storage
-                const fileRef = ref(storage, `resumes/${user.uid}/${file.name}`);
+                const fileRef = ref(storage, `cv_uploads/${user.uid}/${file.name}`);
                 await uploadBytes(fileRef, file);
 
                 // Get the file's download URL

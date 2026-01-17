@@ -3,6 +3,12 @@ import { db, auth } from "@/firebase";
 import { collection, addDoc, getDocs, deleteDoc, doc } from "firebase/firestore";
 
 const Experiences = () => {
+
+  const currentYear = new Date().getFullYear();
+  const startYearOptions = Array.from(
+    { length: 81 },
+    (_, i) => currentYear - i
+  );
   const [workList, setWorkList] = useState([]);
   const [newWork, setNewWork] = useState({
     title: "",
@@ -18,8 +24,12 @@ const Experiences = () => {
       if (!user) return;
 
       const querySnapshot = await getDocs(collection(db, `users/${user.uid}/work_experience`));
-      const workData = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      const workData = querySnapshot.docs
+        .map((doc) => ({ id: doc.id, ...doc.data() }))
+        .sort((a, b) => Number(a.startYear) - Number(b.startYear));
+
       setWorkList(workData);
+
     };
 
     fetchWork();
@@ -39,16 +49,25 @@ const Experiences = () => {
       setNewWork({ title: "", company: "", startYear: "", endYear: "", description: "" });
 
       // Close the modal using Bootstrap's JS
-      window.bootstrap.Modal.getInstance(document.getElementById("workModal")).hide();
+      // window.bootstrap.Modal.getInstance(document.getElementById("workModal")).hide();
     } catch (error) {
       console.error("Error adding work experience:", error);
     }
   };
 
+  const deleteWork = async (id) => {
+    const user = auth.currentUser;
+    if (!user) return;
+
+    await deleteDoc(doc(db, `users/${user.uid}/work_experience`, id));
+    setWorkList(workList.filter(item => item.id !== id));
+  };
+
+
   return (
     <div className="resume-outer theme-blue">
       <div className="upper-title">
-        <h4>Work & Experience</h4>
+        <h4>Work Experience</h4>
         <button
           className="add-info-btn"
           data-bs-toggle="modal"
@@ -90,24 +109,51 @@ const Experiences = () => {
                 </div>
                 <div className="row">
                   <div className="form-group col-lg-6 col-md-12">
-                    <input
-                      type="text"
+                    <select
                       className="form-control"
-                      placeholder="Start Year"
                       value={newWork.startYear}
-                      onChange={(e) => setNewWork({ ...newWork, startYear: e.target.value })}
+                      onChange={(e) =>
+                        setNewWork({
+                          ...newWork,
+                          startYear: e.target.value,
+                          endYear: "" // reset end year if start changes
+                        })
+                      }
                       required
-                    />
+                    >
+                      <option value="">Start Year</option>
+                      {startYearOptions.map((year) => (
+                        <option key={year} value={year}>
+                          {year}
+                        </option>
+                      ))}
+                    </select>
+
                   </div>
                   <div className="form-group col-lg-6 col-md-12">
-                    <input
-                      type="text"
+                    <select
                       className="form-control"
-                      placeholder="End Year"
                       value={newWork.endYear}
-                      onChange={(e) => setNewWork({ ...newWork, endYear: e.target.value })}
+                      onChange={(e) =>
+                        setNewWork({ ...newWork, endYear: e.target.value })
+                      }
+                      disabled={!newWork.startYear}
                       required
-                    />
+                    >
+                      <option value="">End Year</option>
+                      <option value="Present">Present</option>
+
+                      {newWork.startYear &&
+                        Array.from(
+                          { length: currentYear - newWork.startYear + 1 },
+                          (_, i) => Number(newWork.startYear) + i
+                        ).map((year) => (
+                          <option key={year} value={year}>
+                            {year}
+                          </option>
+                        ))}
+                    </select>
+
                   </div>
                 </div>
                 <div className="row">
@@ -120,14 +166,54 @@ const Experiences = () => {
                     ></textarea>
                   </div>
                 </div>
-                <button type="submit" className="theme-btn btn-style-one">
+                <button
+                  type="submit"
+                  className="theme-btn btn-style-one"
+                  data-bs-dismiss="modal"
+                >
                   Save
                 </button>
+
               </form>
             </div>
           </div>
         </div>
       </div>
+
+
+      {
+        workList.map((work) => (
+          <div className="resume-block" key={work.id}>
+            <div className="inner">
+              <span className="name">
+                {work.title ? work.title.charAt(0) : "W"}
+              </span>
+
+              <div className="title-box">
+                <div className="info-box">
+                  <h3>{work.title}</h3>
+                  <span>{work.company}</span>
+                </div>
+
+                <div className="edit-box">
+                  <span className="year">
+                    {work.startYear} - {work.endYear}
+                  </span>
+
+                  <button onClick={() => deleteWork(work.id)}>
+                    <span className="la la-trash"></span>
+                  </button>
+                </div>
+              </div>
+
+              <div className="text">{work.description}</div>
+            </div>
+          </div>
+        ))
+      }
+
+
+
     </div>
   );
 };

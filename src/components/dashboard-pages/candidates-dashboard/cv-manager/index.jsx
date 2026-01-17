@@ -39,10 +39,11 @@ const index = () => {
               {/* <!-- Ls widget --> */}
               <div className="cv-manager-widget ls-widget">
                 <div className="widget-title">
-                  <h4>Cv Manager</h4>
+                  <h4>CV Manager</h4>
                 </div>
                 {/* End widget-title */}
                 <div className="widget-content">
+                  <p>Use this page to upload your CV. We accept Word documents (.doc, .docx), and PDF files.</p>
                   <CvUploader />
                 </div>
                 {/* End widget-content */}

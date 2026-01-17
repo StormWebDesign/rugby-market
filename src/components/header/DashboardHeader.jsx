@@ -10,6 +10,15 @@ import { doc, getDoc } from "firebase/firestore"; // Firebase Firestore methods
 
 const DashboardHeader = () => {
     const { pathname } = useLocation();
+
+    const logoLink =
+        pathname.startsWith("/candidates-dashboard")
+            ? "/candidates-dashboard/dashboard"
+            : pathname.startsWith("/employers-dashboard")
+                ? "/employers-dashboard/dashboard"
+                : "/";
+
+
     const [navbar, setNavbar] = useState(false);
     const [logoURL, setLogoURL] = useState("/images/resource/company-6.png"); // Default image
     const [loading, setLoading] = useState(true);
@@ -60,11 +69,10 @@ const DashboardHeader = () => {
                     <div className="nav-outer">
                         <div className="logo-box">
                             <div className="logo">
-                                <Link to="/">
-                                    <img
-                                        src="/images/header-logo.svg"
-                                        alt="rugby transfer market logo" />
+                                <Link to={logoLink}>
+                                    <img src="/images/header-logo.svg" alt="rugby transfer market logo" />
                                 </Link>
+
                             </div>
                         </div>
 

@@ -16,6 +16,10 @@ const RugbyDetails = () => {
     allowSearch: "Yes",
   });
 
+  const currentYear = new Date().getFullYear();
+  const yearOptions = Array.from({ length: 81 }, (_, i) => currentYear - i);
+
+
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -127,17 +131,21 @@ const RugbyDetails = () => {
         {/* Year Started */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Year Joined</label>
-          <input
-            type="number"
+          <select
             name="yearStarted"
-            placeholder="1950"
-            min="1950"
-            max="2099"
-            step="1"
+            className="form-control"
             value={formData.yearStarted}
             onChange={handleInputChange}
             required
-          />
+          >
+            <option value="">Select year joined</option>
+            {yearOptions.map((year) => (
+              <option key={year} value={year}>
+                {year}
+              </option>
+            ))}
+          </select>
+
         </div>
         {/* positions */}
         <div className="form-group col-lg-6 col-md-12">

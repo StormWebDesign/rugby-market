@@ -121,11 +121,6 @@ const LogoUpload = () => {
     };
 
     const handleDeleteImage = async () => {
-        if (!uploadedImgUrl) {
-            setErrorMessage("No image to delete.");
-            return;
-        }
-
         setLoading(true);
         setErrorMessage("");
         setSuccessMessage("");
@@ -137,39 +132,22 @@ const LogoUpload = () => {
                 return;
             }
 
-            const publicId = uploadedImgUrl.split("/").pop().split(".")[0];
-            console.log("Public ID:", publicId);
+            const userDocRef = doc(db, "users", user.uid);
+            await updateDoc(userDocRef, {
+                fullImage: "",
+                thumbnailImage: "",
+            });
 
-            const deleteResponse = await fetch(
-                `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/destroy`,
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ public_id: publicId }),
-                }
-            );
-
-            const deleteData = await deleteResponse.json();
-            console.log("Delete Data:", deleteData);
-
-            if (deleteData.result === "ok") {
-                const userDocRef = doc(db, "users", user.uid);
-                await updateDoc(userDocRef, { fullImage: "", thumbnailImage: "" });
-
-                setUploadedImgUrl("");
-                setSuccessMessage("Profile image deleted successfully!");
-            } else {
-                setErrorMessage("Failed to delete the image from Cloudinary.");
-            }
+            setUploadedImgUrl("");
+            setSuccessMessage("Profile image removed successfully!");
         } catch (err) {
-            console.error("Error deleting image:", err);
-            setErrorMessage("An error occurred while deleting the image.");
+            console.error("Error removing image:", err);
+            setErrorMessage("An error occurred while removing the image.");
         } finally {
             setLoading(false);
         }
     };
+
 
     return (
         <div className="uploading-outer">

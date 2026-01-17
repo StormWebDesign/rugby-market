@@ -1,5 +1,6 @@
 
-import CvManager from "@/components/dashboard-pages/candidates-dashboard/cv-manager";
+// import CvManager from "@/components/dashboard-pages/candidates-dashboard/cv-manager";
+import CvManager from "@/components/dashboard-pages/candidates-dashboard/cv-manager/index.jsx";
 
 import MetaComponent from "@/components/common/MetaComponent";
 

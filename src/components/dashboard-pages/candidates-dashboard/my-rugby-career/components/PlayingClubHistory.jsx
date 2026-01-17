@@ -8,6 +8,9 @@ import { catPositions } from "@/data/positions";
 import { catTypes } from "@/data/rugbyTypes";
 
 const PlayingClubHistoryForm = () => {
+
+  const currentYear = new Date().getFullYear();
+  const yearOptions = Array.from({ length: 81 }, (_, i) => currentYear - i);
   const [clubHistory, setClubHistory] = useState([]);
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -28,7 +31,12 @@ const PlayingClubHistoryForm = () => {
 
         if (userDoc.exists()) {
           const userData = userDoc.data();
-          setClubHistory(userData.clubHistory || []);
+          const sortedHistory = (userData.clubHistory || []).sort(
+            (a, b) => Number(a.yearJoined) - Number(b.yearJoined)
+          );
+
+          setClubHistory(sortedHistory);
+
         }
       } catch (err) {
         console.error("Error fetching club history:", err);
@@ -149,31 +157,49 @@ const PlayingClubHistoryForm = () => {
           {/* Year Joined */}
           <div className="form-group col-lg-1 col-md-12">
             <label>Year Joined</label>
-            <input
-              type="number"
-              placeholder="1950"
-              min="1950"
-              max="2099"
-              step="1"
+            <select
+              className="form-control"
               value={entry.yearJoined}
-              onChange={(e) => handleInputChange(index, "yearJoined", e.target.value)}
+              onChange={(e) => {
+                handleInputChange(index, "yearJoined", e.target.value);
+                handleInputChange(index, "yearLeft", "");
+              }}
               required
-            />
+            >
+              <option value="">Joined</option>
+              {yearOptions.map((year) => (
+                <option key={year} value={year}>
+                  {year}
+                </option>
+              ))}
+            </select>
+
           </div>
 
           {/* Year Left */}
           <div className="form-group col-lg-1 col-md-12">
             <label>Year Left</label>
-            <input
-              type="number"
-              placeholder="1950"
-              min="1950"
-              max="2099"
-              step="1"
+            <select
+              className="form-control"
               value={entry.yearLeft}
               onChange={(e) => handleInputChange(index, "yearLeft", e.target.value)}
+              disabled={!entry.yearJoined}
               required
-            />
+            >
+              <option value="">Left</option>
+              <option value="Present">Present</option>
+
+              {entry.yearJoined &&
+                Array.from(
+                  { length: currentYear - entry.yearJoined + 1 },
+                  (_, i) => Number(entry.yearJoined) + i
+                ).map((year) => (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                ))}
+            </select>
+
           </div>
 
           {/* Remove Button */}

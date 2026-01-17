@@ -1,10 +1,10 @@
 
-import MyResume from "@/components/dashboard-pages/candidates-dashboard/my-resume";
+import MyResume from "@/components/dashboard-pages/candidates-dashboard/my-resume/index.jsx";
 
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
-  title: "My Resume || Rugby Transfer Market",
+  title: "My Work & Education || Rugby Transfer Market",
   description: "Rugby Transfer Market",
 };
 
