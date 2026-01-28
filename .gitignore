@@ -25,3 +25,5 @@ dist-ssr
 .code-workspace
 yarn.lock
 yarn.lock
+.vscode/extensions.json
+rugbymarket.code-workspace
