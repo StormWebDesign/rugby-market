@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const Social = ({ company }) => {
   // Define social platforms and their icons
   const socialPlatforms = [
@@ -34,6 +36,10 @@ const Social = ({ company }) => {
       })}
     </div>
   );
+};
+
+Social.propTypes = {
+  company: PropTypes.object,
 };
 
 export default Social;

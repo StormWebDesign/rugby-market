@@ -1,6 +1,3 @@
-
-import SearchBox from "./SearchBox";
-
 const ChatboxContactList = () => {
     return (
         <ul className="contacts">

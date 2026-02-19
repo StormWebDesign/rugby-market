@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import jobFeatured from "../../data/job-featured";
 import { useEffect, useState } from "react";
-
+import PropTypes from "prop-types";
 
 const JobFeaturedFilter = ({category}) => {
     const [filtered, setFiltered] = useState([])
@@ -75,6 +75,10 @@ const JobFeaturedFilter = ({category}) => {
       ))}
     </>
   );
+};
+
+JobFeaturedFilter.propTypes = {
+  category: PropTypes.string,
 };
 
 export default JobFeaturedFilter;

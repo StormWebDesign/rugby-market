@@ -1,4 +1,5 @@
 import { format, differenceInMinutes, differenceInHours, differenceInDays, differenceInMonths } from "date-fns";
+import PropTypes from "prop-types";
 
 const JobOverView2 = ({ job }) => {
   const getTimeSincePosted = (timestamp) => {
@@ -76,6 +77,18 @@ const JobOverView2 = ({ job }) => {
       </li>
     </ul>
   );
+};
+
+JobOverView2.propTypes = {
+  job: PropTypes.shape({
+    timestamp: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+    applicationDeadlineDate: PropTypes.string,
+    city: PropTypes.string,
+    country: PropTypes.string,
+    currency: PropTypes.string,
+    offeredSalary: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    rates: PropTypes.string,
+  }),
 };
 
 export default JobOverView2;

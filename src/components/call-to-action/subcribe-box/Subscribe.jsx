@@ -1,6 +1,4 @@
-
-
-
+import PropTypes from "prop-types";
 
 const Subscribe = ({ btnStyle = "" }) => {
   const handleSubmit = (event) => {
@@ -29,6 +27,10 @@ const Subscribe = ({ btnStyle = "" }) => {
       </div>
     </form>
   );
+};
+
+Subscribe.propTypes = {
+  btnStyle: PropTypes.string,
 };
 
 export default Subscribe;

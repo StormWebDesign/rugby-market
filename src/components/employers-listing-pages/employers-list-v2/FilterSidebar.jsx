@@ -1,6 +1,5 @@
 import Categories from "../components/Categories";
 import DestinationRangeSlider from "../components/DestinationRangeSlider";
-import CompanySize from "../components/CompanySize";
 import LocationBox from "../components/LocationBox";
 import FoundationDate from "../components/FoundationDate";
 import SearchBox from "../components/SearchBox";

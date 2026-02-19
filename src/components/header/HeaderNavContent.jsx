@@ -127,8 +127,6 @@ const HeaderNavContent = () => {
               pathname?.split("/")[1] === "candidates-dashboard"
                 ? "current"
                 : ""
-                ? "current"
-                : ""
             } dropdown`}
           >
             <span>Candidates</span>

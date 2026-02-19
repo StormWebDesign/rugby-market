@@ -32,5 +32,5 @@ export const employerSlice = createSlice({
     reducers: {},
 });
 
-export const {} = employerSlice.actions;
+// No actions exported yet
 export default employerSlice.reducer;

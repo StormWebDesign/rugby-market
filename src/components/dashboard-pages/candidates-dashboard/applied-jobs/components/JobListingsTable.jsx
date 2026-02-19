@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const JobListingsTable = ({ appliedJobs, loading }) => {
   return (
@@ -51,6 +52,11 @@ const JobListingsTable = ({ appliedJobs, loading }) => {
       </div>
     </div>
   );
+};
+
+JobListingsTable.propTypes = {
+  appliedJobs: PropTypes.array,
+  loading: PropTypes.bool,
 };
 
 export default JobListingsTable;

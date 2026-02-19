@@ -7,7 +7,7 @@ import { addCategory } from "../../../features/filter/filterSlice";
 
 const Categories = () => {
     const { jobList } = useSelector((state) => state.filter) || {};
-    const [getCategory, setCategory] = useState(jobList.category);
+    const [, setCategory] = useState(jobList.category);
 
     const dispatch = useDispatch();
 

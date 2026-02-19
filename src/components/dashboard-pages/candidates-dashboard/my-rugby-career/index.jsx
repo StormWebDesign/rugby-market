@@ -1,14 +1,11 @@
 import MobileMenu from "../../../header/MobileMenu";
 import LoginPopup from "../../../common/form/login/LoginPopup";
 import DashboardCandidatesSidebar from "../../../header/DashboardCandidatesSidebar";
-import BreadCrumb from "../../BreadCrumb";
 import RugbyDetails from "../my-profile/components/RugbyDetails";
 import CopyrightFooter from "../../CopyrightFooter";
-import Resume from "./components";
 import PlayingClubHistory from "./components/PlayingClubHistory";
 import DashboardCandidatesHeader from "../../../header/DashboardCandidatesHeader";
 import MenuToggler from "../../MenuToggler";
-import PlayingClubHistoryForm from "./components/PlayingClubHistory";
 
 const index = () => {
   return (

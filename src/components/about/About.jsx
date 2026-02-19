@@ -44,8 +44,6 @@ const About = () => {
           <span className="title">300k+ Employers</span>
           <figure className="image">
             <img
-             
-              layout="responsive"
               src="/images/resource/multi-logo.png"
               alt="resource"
             />

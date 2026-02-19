@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { db, auth } from "@/firebase";
+import { db } from "@/firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import Select from "react-select";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
 // Import data from the data files
 import { catPositions } from "@/data/positions";
@@ -306,6 +307,10 @@ const EditJobForm = ({ jobId }) => {
             {message && <p>{message}</p>}
         </form>
     );
+};
+
+EditJobForm.propTypes = {
+    jobId: PropTypes.string,
 };
 
 export default EditJobForm;

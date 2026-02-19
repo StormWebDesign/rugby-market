@@ -6,6 +6,7 @@ import BreadCrumb from "../../BreadCrumb";
 import CopyrightFooter from "../../CopyrightFooter";
 import EditJobForm from "./components/EditJobForm";
 import MenuToggler from "../../MenuToggler";
+import PropTypes from "prop-types";
 
 const EditJob = ({ jobId }) => {
   return (
@@ -40,6 +41,10 @@ const EditJob = ({ jobId }) => {
       <CopyrightFooter />
     </div>
   );
+};
+
+EditJob.propTypes = {
+  jobId: PropTypes.string,
 };
 
 export default EditJob;

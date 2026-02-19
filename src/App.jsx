@@ -14,42 +14,8 @@ if (typeof window !== "undefined") {
 }
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages";
-// import HomePage1 from "./pages/home/home-1";
-// import HomePage2 from "./pages/home/home-2";
-// import HomePage3 from "./pages/home/home-3";
-// import HomePage4 from "./pages/home/home-4";
-// import HomePage5 from "./pages/home/home-5";
-// import HomePage6 from "./pages/home/home-6";
-// import HomePage7 from "./pages/home/home-7";
-// import HomePage8 from "./pages/home/home-8";
-// import HomePage9 from "./pages/home/home-9";
-// import HomePage10 from "./pages/home/home-10";
-// import HomePage11 from "./pages/home/home-11";
-// import HomePage12 from "./pages/home/home-12";
-// import HomePage13 from "./pages/home/home-13";
-// import HomePage14 from "./pages/home/home-14";
-// import HomePage15 from "./pages/home/home-15";
-// import HomePage16 from "./pages/home/home-16";
-// import HomePage17 from "./pages/home/home-17";
 import JobListPage1 from "./pages/job-list/job-list-v1";
-// import JobListPage2 from "./pages/job-list/job-list-v2";
-// import JobListPage3 from "./pages/job-list/job-list-v3";
-// import JobListPage4 from "./pages/job-list/job-list-v4";
-// import JobListPage5 from "./pages/job-list/job-list-v5";
-// import JobListPage6 from "./pages/job-list/job-list-v6";
-// import JobListPage7 from "./pages/job-list/job-list-v7";
-// import JobListPage8 from "./pages/job-list/job-list-v8";
-// import JobListPage9 from "./pages/job-list/job-list-v9";
-// import JobListPage10 from "./pages/job-list/job-list-v10";
-// import JobListPage11 from "./pages/job-list/job-list-v11";
-// import JobListPage12 from "./pages/job-list/job-list-v12";
-// import JobListPage13 from "./pages/job-list/job-list-v13";
-// import JobListPage14 from "./pages/job-list/job-list-v14";
-import JobSingleDynamicV1 from "./pages/job-single/job-single-v1";
-import JobSingleDynamicV2 from "./pages/job-single/job-single-v2";
 import JobSingleDynamicV3 from "./pages/job-single/job-single-v3";
-import JobSingleDynamicV4 from "./pages/job-single/job-single-v4";
-import JobSingleDynamicV5 from "./pages/job-single/job-single-v5";
 import ScrollTopBehaviour from "./components/common/ScrollTopBehaviour";
 import EmployerListPage1 from "./pages/employers-list/employers-list-v1";
 import EmployerListPage2 from "./pages/employers-list/employers-list-v2";
@@ -125,44 +91,8 @@ function App() {
               <Routes>
                 <Route path="/">
                   <Route index element={<Home />} />
-                  {/* <Route path="home-1" element={<HomePage1 />} />
-                  <Route path="home-2" element={<HomePage2 />} />
-                  <Route path="home-3" element={<HomePage3 />} />
-                  <Route path="home-4" element={<HomePage4 />} />
-                  <Route path="home-5" element={<HomePage5 />} />
-                  <Route path="home-6" element={<HomePage6 />} />
-                  <Route path="home-7" element={<HomePage7 />} />
-                  <Route path="home-8" element={<HomePage8 />} />
-                  <Route path="home-9" element={<HomePage9 />} />
-                  <Route path="home-10" element={<HomePage10 />} />
-                  <Route path="home-11" element={<HomePage11 />} />
-                  <Route path="home-12" element={<HomePage12 />} />
-                  <Route path="home-13" element={<HomePage13 />} />
-                  <Route path="home-14" element={<HomePage14 />} />
-                  <Route path="home-15" element={<HomePage15 />} />
-                  <Route path="home-16" element={<HomePage16 />} />
-                  <Route path="home-17" element={<HomePage17 />} /> */}
-
                   <Route path="job-listings" element={<JobListPage1 />} />
-                  {/* <Route path="job-list-v2" element={<JobListPage2 />} />
-                  <Route path="job-list-v3" element={<JobListPage3 />} />
-                  <Route path="job-list-v4" element={<JobListPage4 />} />
-                  <Route path="job-list-v5" element={<JobListPage5 />} />
-                  <Route path="job-list-v6" element={<JobListPage6 />} />
-                  <Route path="job-list-v7" element={<JobListPage7 />} />
-                  <Route path="job-list-v8" element={<JobListPage8 />} />
-                  <Route path="job-list-v9" element={<JobListPage9 />} />
-                  <Route path="job-list-v10" element={<JobListPage10 />} />
-                  <Route path="job-list-v11" element={<JobListPage11 />} />
-                  <Route path="job-list-v12" element={<JobListPage12 />} />
-                  <Route path="job-list-v13" element={<JobListPage13 />} />
-                  <Route path="job-list-v14" element={<JobListPage14 />} /> */}
-                  {/* <Route path="job-single-v1/:id" element={<JobSingleDynamicV1 />} /> */}
-                  {/* <Route path="job-single-v2/:id" element={<JobSingleDynamicV2 />} /> */}
-                  {/* <Route path="job-single-v3/:id" element={<JobSingleDynamicV3 />} /> */}
                   <Route path="/job-listings/:id" element={<JobSingleDynamicV3 />} />
-                  {/* <Route path="job-single-v4/:id" element={<JobSingleDynamicV4 />} /> */}
-                  {/* <Route path="job-single-v5/:id" element={<JobSingleDynamicV5 />} /> */}
 
                   <Route path="employers-list-v1" element={<EmployerListPage1 />} />
                   <Route path="employers-list-v2" element={<EmployerListPage2 />} />

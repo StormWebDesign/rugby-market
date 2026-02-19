@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "@/firebase";
-import { doc, getDoc, updateDoc } from "firebase/firestore"; // Added updateDoc for Firestore updates
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";
 import LoginWithSocial from "./LoginWithSocial";
+import PropTypes from "prop-types";
 
 const FormContent = ({ setSuccessMessage, setErrorMessage }) => {
   const [email, setEmail] = useState("");
@@ -126,6 +127,11 @@ const FormContent = ({ setSuccessMessage, setErrorMessage }) => {
       </div>
     </div>
   );
+};
+
+FormContent.propTypes = {
+  setSuccessMessage: PropTypes.func,
+  setErrorMessage: PropTypes.func,
 };
 
 export default FormContent;

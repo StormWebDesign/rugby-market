@@ -29,7 +29,7 @@ const SalaryRangeSlider = () => {
     return (
         <div className="range-slider-one salary-range">
             <InputRange
-                formatLabel={(value) => ``}
+                formatLabel={() => ""}
                 minValue={0}
                 maxValue={20000}
                 value={{

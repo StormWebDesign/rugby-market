@@ -1,4 +1,3 @@
-import { useState } from "react";
 import CallToActions from "../components/CallToActions";
 import RugbyTypes from "../components/RugbyTypes"; // New component for Rugby Types
 import GenderFilter from "../components/GenderFilter"; // New component for Gender

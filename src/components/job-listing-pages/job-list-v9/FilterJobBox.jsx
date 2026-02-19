@@ -3,7 +3,6 @@
 
 
 import { Link } from "react-router-dom";
-import Pagination from "../components/Pagination";
 import jobs from "../../../data/job-featured";
 import { useDispatch, useSelector } from "react-redux";
 import {

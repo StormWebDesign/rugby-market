@@ -30,7 +30,7 @@ const About12 = () => {
                     <br />  Players and Clubs Worldwide
                   </h2>
                   <div className="mt-30 lead-text">
-                    Whether you're a <span className="fw-700">rugby player looking for new opportunities</span> or a <span className="fw-700">club seeking top talent</span>, The Rugby Transfer Market is your go-to platform.
+                    Whether you&apos;re a <span className="fw-700">rugby player looking for new opportunities</span> or a <span className="fw-700">club seeking top talent</span>, The Rugby Transfer Market is your go-to platform.
                     Create a profile, showcase your skills, post or apply for positions, and take your rugby career to the next level.
                   </div>
                   <div className="mt-30 lead-text">

@@ -3,9 +3,9 @@ import { db, auth } from "@/firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 
 const SocialNetworkBox = () => {
-  const [facebook, setfacebook] = useState("");
-  const [twitter, settwitter] = useState("");
-  const [instagram, setinstagram] = useState("");
+  const [facebook, setFacebook] = useState("");
+  const [twitter, setTwitter] = useState("");
+  const [instagram, setInstagram] = useState("");
 
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -23,9 +23,9 @@ const SocialNetworkBox = () => {
 
         if (userDoc.exists()) {
           const userData = userDoc.data();
-          setfacebook(userData.facebook || "");
-          settwitter(userData.twitter || "");
-          setinstagram(userData.instagram || "");
+          setFacebook(userData.facebook || "");
+          setTwitter(userData.twitter || "");
+          setInstagram(userData.instagram || "");
         }
       } catch (err) {
         console.error("Error fetching user data:", err);

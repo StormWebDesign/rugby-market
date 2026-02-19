@@ -1,5 +1,5 @@
-import React from "react";
 import Social from "../social/Social";
+import PropTypes from "prop-types";
 
 const CompanyInfo = ({ company }) => {
   return (
@@ -25,6 +25,17 @@ const CompanyInfo = ({ company }) => {
         </li>
       </ul>
   );
+};
+
+CompanyInfo.propTypes = {
+  company: PropTypes.shape({
+    rugbyType: PropTypes.string,
+    establishedSince: PropTypes.string,
+    phone: PropTypes.string,
+    email: PropTypes.string,
+    city: PropTypes.string,
+    country: PropTypes.string,
+  }),
 };
 
 export default CompanyInfo;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { db, auth } from "@/firebase";
-import { doc, getDoc, collection, addDoc } from "firebase/firestore";
+import { doc, getDoc, collection, addDoc, getDocs, query, where } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 
 import LoginPopup from "@/components/common/form/login/LoginPopup";
@@ -263,7 +263,7 @@ const JobSingleDynamicV3 = () => {
                             <p className="text-success">Thank you, your application has been submitted!</p>
                           ) : (
                             <>
-                              <p>Click "Submit Application" to apply for this job.</p>
+                              <p>Click &quot;Submit Application&quot; to apply for this job.</p>
                               <button className="theme-btn btn-style-one" onClick={handleApply}>
                                 Submit Application
                               </button>

@@ -1,8 +1,8 @@
-
-
 import GoogleMapReact from "google-map-react";
+import PropTypes from "prop-types";
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
+AnyReactComponent.propTypes = { text: PropTypes.string };
 
 export default function Map() {
   const defaultProps = {

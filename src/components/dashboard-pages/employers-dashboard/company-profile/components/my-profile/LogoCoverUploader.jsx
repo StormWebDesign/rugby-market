@@ -2,9 +2,6 @@ import { useState, useEffect } from "react";
 import { db, auth } from "@/firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { Cloudinary } from "@cloudinary/url-gen";
-import { crop } from "@cloudinary/url-gen/actions/resize";
-import { focusOn } from "@cloudinary/url-gen/qualifiers/gravity";
-import { face } from "@cloudinary/url-gen/qualifiers/focusOn";
 
 const LogoCoverUploader = () => {
     const [logoImg, setLogoImg] = useState(null);

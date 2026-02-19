@@ -1,6 +1,6 @@
 // import Head from "next/head";
 
-const Seo = ({ pageTitle }) => (
+const Seo = () => (
 
   
   <>

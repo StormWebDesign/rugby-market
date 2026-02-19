@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import { db, auth } from "@/firebase";
 import { doc, updateDoc, arrayUnion, arrayRemove, getDoc } from "firebase/firestore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -62,6 +63,10 @@ const BookmarkButton = ({ jobId }) => {
       />
     </button>
   );
+};
+
+BookmarkButton.propTypes = {
+  jobId: PropTypes.string,
 };
 
 export default BookmarkButton;

@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const BreadCrumb = ({ title = "" }) => {
   return (
     <div className="mobile-only-breadcrumb">
@@ -7,6 +9,10 @@ const BreadCrumb = ({ title = "" }) => {
       </div>
     </div>
   );
+};
+
+BreadCrumb.propTypes = {
+  title: PropTypes.string,
 };
 
 export default BreadCrumb;

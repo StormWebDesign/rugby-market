@@ -1,6 +1,7 @@
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth, db } from "@/firebase";
 import { doc, setDoc } from "firebase/firestore";
+import PropTypes from "prop-types";
 
 const LoginWithSocial = ({ setSuccessMessage, setErrorMessage }) => {
   const handleGoogleLogin = async () => {
@@ -37,6 +38,11 @@ const LoginWithSocial = ({ setSuccessMessage, setErrorMessage }) => {
       </div>
     </div>
   );
+};
+
+LoginWithSocial.propTypes = {
+  setSuccessMessage: PropTypes.func,
+  setErrorMessage: PropTypes.func,
 };
 
 export default LoginWithSocial;

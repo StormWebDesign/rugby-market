@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const JobDetailsDescriptions = ({ job }) => {
   return (
     <div className="job-detail">
@@ -23,6 +25,14 @@ const JobDetailsDescriptions = ({ job }) => {
       </ul>
     </div>
   );
+};
+
+JobDetailsDescriptions.propTypes = {
+  job: PropTypes.shape({
+    jobDescription: PropTypes.string,
+    jobResponsibilities: PropTypes.string,
+    jobExperience: PropTypes.string,
+  }),
 };
 
 export default JobDetailsDescriptions;

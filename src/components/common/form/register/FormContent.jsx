@@ -3,6 +3,7 @@ import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/
 import { db, auth } from "@/firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const FormContent = ({ setSuccessMessage, setErrorMessage, userType }) => {
   const [email, setEmail] = useState("");
@@ -77,6 +78,12 @@ const FormContent = ({ setSuccessMessage, setErrorMessage, userType }) => {
       </div>
     </form>
   );
+};
+
+FormContent.propTypes = {
+  setSuccessMessage: PropTypes.func,
+  setErrorMessage: PropTypes.func,
+  userType: PropTypes.string,
 };
 
 export default FormContent;

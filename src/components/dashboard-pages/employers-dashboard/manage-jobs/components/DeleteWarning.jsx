@@ -1,4 +1,4 @@
-import React from "react";
+import PropTypes from "prop-types";
 
 const DeleteWarning = ({ onDeleteConfirm, onCancel }) => {
   return (
@@ -23,6 +23,11 @@ const DeleteWarning = ({ onDeleteConfirm, onCancel }) => {
       </div>
     </div>
   );
+};
+
+DeleteWarning.propTypes = {
+  onDeleteConfirm: PropTypes.func,
+  onCancel: PropTypes.func,
 };
 
 export default DeleteWarning;

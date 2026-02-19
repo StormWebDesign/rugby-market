@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { db, auth } from "@/firebase";
 import { collection, query, where, getDocs, doc, getDoc } from "firebase/firestore";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { Tabs, TabPanel } from "react-tabs";
 import { Link } from "react-router-dom";
-import LoadingSpinner from "@/components/common/LoadingSpinner"; 
+import LoadingSpinner from "@/components/common/LoadingSpinner";
+import PropTypes from "prop-types";
 
 const WidgetContentBox = ({ selectedJob }) => {
   const [candidatesData, setCandidatesData] = useState([]);
@@ -120,6 +121,10 @@ const WidgetContentBox = ({ selectedJob }) => {
       </Tabs>
     </div>
   );
+};
+
+WidgetContentBox.propTypes = {
+  selectedJob: PropTypes.string,
 };
 
 export default WidgetContentBox;

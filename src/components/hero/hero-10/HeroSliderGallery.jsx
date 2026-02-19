@@ -1,8 +1,5 @@
-
-
-
-
 import Slider from "react-slick";
+import PropTypes from "prop-types";
 
 const HeroSliderGallery = () => {
   const settings = {
@@ -37,6 +34,7 @@ const HeroSliderGallery = () => {
       </button>
     );
   }
+  Arrow.propTypes = { type: PropTypes.string, onClick: PropTypes.func };
 
   return (
     <div className="banner-carousel arrow-center-between arrow-rounded hide-arrow-1024">

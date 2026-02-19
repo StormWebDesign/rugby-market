@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { db } from "@/firebase"; // Adjust path to your firebase.js
+import { db } from "@/firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
-import { format } from "date-fns"; // Import date-fns for formatting
+import { format } from "date-fns";
 import CountUp from 'react-countup';
 import SearchForm from "../../common/job-search/SearchForm";
-import PopularSearch from "../PopularSearch";
 import Partner from "../../common/partner/Partner";
 import HeroImage from "@/components/common/HeroImage";
 

@@ -5,14 +5,12 @@ import { doc, getDoc } from "firebase/firestore";
 const Experiences = () => {
   const [rugbyExperience, setRugbyExperience] = useState([]);
   const [isFetching, setIsFetching] = useState(true);
-  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     const fetchRugbyExperience = async () => {
       try {
         const user = auth.currentUser;
         if (!user) {
-          setErrorMessage("User is not logged in.");
           return;
         }
 
@@ -25,7 +23,6 @@ const Experiences = () => {
         }
       } catch (err) {
         console.error("Error fetching rugby experience:", err);
-        setErrorMessage("Failed to fetch rugby experience.");
       } finally {
         setIsFetching(false);
       }

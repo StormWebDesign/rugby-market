@@ -1,37 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { db, auth } from "@/firebase";
-import { collection, getDocs, doc, updateDoc, arrayUnion, arrayRemove, getDoc } from "firebase/firestore";
-import { useSelector } from "react-redux";
-import { rugbyCountries } from "@/data/countries";
-import { onAuthStateChanged } from "firebase/auth";
-import BookmarkButton from "@/components/common/BookmarkButton"; // Import new component
+import { db } from "@/firebase";
+import { collection, getDocs, doc, getDoc } from "firebase/firestore";
+import BookmarkButton from "@/components/common/BookmarkButton";
 
 const FilterJobsBox = () => {
   const [jobList, setJobList] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [userType, setUserType] = useState(null);
-  const [userId, setUserId] = useState(null);
-  const [shortlistedJobs, setShortlistedJobs] = useState([]);
-
-  // Get selected filters from Redux
-  const { jobList: selectedFilters } = useSelector((state) => state.filter);
-  const { category, tag, gender, keyword, datePosted, location } = selectedFilters;
-
-  // Fetch the logged-in user data
-  useEffect(() => {
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        setUserId(user.uid);
-        const userRef = doc(db, "users", user.uid);
-        const userSnap = await getDoc(userRef);
-        if (userSnap.exists()) {
-          setUserType(userSnap.data().userType);
-          setShortlistedJobs(userSnap.data().shortlistedJobs || []);
-        }
-      }
-    });
-  }, []);
 
   // Fetch jobs from Firestore and get club logos
   useEffect(() => {
@@ -70,28 +45,6 @@ const FilterJobsBox = () => {
 
     fetchJobs();
   }, []);
-
-  // Function to toggle shortlist job
-  const toggleShortlistJob = async (jobId) => {
-    if (!userId) return;
-
-    try {
-      const userRef = doc(db, "users", userId);
-      if (shortlistedJobs.includes(jobId)) {
-        await updateDoc(userRef, {
-          shortlistedJobs: arrayRemove(jobId),
-        });
-        setShortlistedJobs(shortlistedJobs.filter((id) => id !== jobId));
-      } else {
-        await updateDoc(userRef, {
-          shortlistedJobs: arrayUnion(jobId),
-        });
-        setShortlistedJobs([...shortlistedJobs, jobId]);
-      }
-    } catch (error) {
-      console.error("Error updating shortlist:", error);
-    }
-  };
 
   if (loading) {
     return <div>Loading jobs...</div>;

@@ -23,12 +23,12 @@ const DestinationRangeSlider = () => {
     // destination dispatch
     useEffect(() => {
         setDestination(destination);
-    });
+    }, [destination]);
 
     return (
         <div className="range-slider-one">
             <InputRange
-                formatLabel={(value) => ``}
+                formatLabel={() => ""}
                 minValue={0}
                 maxValue={100}
                 value={getDestination}

@@ -107,7 +107,7 @@ export const candidateSlice = createSlice({
                 };
             });
         },
-        clearDatePost: (state, { payload }) => {
+        clearDatePost: (state) => {
             state?.datePost?.map((item) => {
                 item.isChecked = false;
                 return {
@@ -129,7 +129,7 @@ export const candidateSlice = createSlice({
                 };
             });
         },
-        clearExperience: (state, { payload }) => {
+        clearExperience: (state) => {
             state?.experience?.map((item) => {
                 item.isChecked = false;
                 return {
@@ -151,7 +151,7 @@ export const candidateSlice = createSlice({
                 };
             });
         },
-        clearQualification: (state, { payload }) => {
+        clearQualification: (state) => {
             state?.qualification?.map((item) => {
                 item.isChecked = false;
                 return {

@@ -11,8 +11,6 @@ const Blog = () => {
             <div className="image-box">
               <figure className="image">
                 <img
-                 
-                  layout="responsive"
                   src={item.img}
                   alt="blog post"
                 />

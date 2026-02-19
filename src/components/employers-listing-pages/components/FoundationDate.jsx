@@ -27,7 +27,7 @@ const FoundationDate = () => {
     return (
         <div className="range-slider-one salary-range">
             <InputRange
-                formatLabel={(value) => ``}
+                formatLabel={() => ""}
                 minValue={1900}
                 maxValue={2028}
                 value={foundationDate}

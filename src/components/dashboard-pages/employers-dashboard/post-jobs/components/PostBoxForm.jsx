@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { db, auth } from "@/firebase";
 import { doc, getDoc, addDoc, collection, Timestamp } from "firebase/firestore";
-import Map from "../../../Map";
 import Select from "react-select";
 
 // Import data from the data files

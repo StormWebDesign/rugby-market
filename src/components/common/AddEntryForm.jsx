@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 const AddEntryForm = ({ onSave, placeholderTitle, placeholderSubtitle }) => {
   const [entries, setEntries] = useState([]);
@@ -60,6 +61,12 @@ const AddEntryForm = ({ onSave, placeholderTitle, placeholderSubtitle }) => {
       </button>
     </div>
   );
+};
+
+AddEntryForm.propTypes = {
+  onSave: PropTypes.func,
+  placeholderTitle: PropTypes.string,
+  placeholderSubtitle: PropTypes.string,
 };
 
 export default AddEntryForm;

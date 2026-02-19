@@ -12,9 +12,9 @@ import { useEffect, useState } from "react";
 import { Gallery, Item } from "react-photoswipe-gallery";
 import "photoswipe/dist/photoswipe.css";
 import { useDispatch } from "react-redux";
-import { addCart, addQty } from "@/features/shop/shopSlice";
+import { addCart } from "@/features/shop/shopSlice";
 import ShopHeader from "@/components/header/ShopHeader";
-
+import PropTypes from "prop-types";
 
 const ShopSingleDyanmic = ({ id }) => {
   const [product, setProducts] = useState({});
@@ -179,6 +179,10 @@ const ShopSingleDyanmic = ({ id }) => {
       {/* <!-- End Main Footer --> */}
     </>
   );
+};
+
+ShopSingleDyanmic.propTypes = {
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default ShopSingleDyanmic

@@ -6,6 +6,7 @@ import BreadCrumb from "../../BreadCrumb";
 import CopyrightFooter from "../../CopyrightFooter";
 import JobListingsTable from "./components/JobListingsTable";
 import MenuToggler from "../../MenuToggler";
+import PropTypes from "prop-types";
 
 const AppliedJobs = ({ appliedJobs, loading }) => {
   return (
@@ -35,6 +36,11 @@ const AppliedJobs = ({ appliedJobs, loading }) => {
       <CopyrightFooter />
     </div>
   );
+};
+
+AppliedJobs.propTypes = {
+  appliedJobs: PropTypes.array,
+  loading: PropTypes.bool,
 };
 
 export default AppliedJobs;

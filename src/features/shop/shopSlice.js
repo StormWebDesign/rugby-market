@@ -38,7 +38,7 @@ export const shopSlice = createSlice({
             });
             localStorage.setItem("local-cart", JSON.stringify(state.cart));
         },
-        reloadCart: (state, { payload }) => {
+        reloadCart: (state) => {
             const cart = JSON.parse(localStorage.getItem("local-cart"));
             if (cart) {
                 state.cart = cart;

@@ -5,6 +5,7 @@
 
 import testimonilaContent from "../../data/testimonial";
 import Slider from "react-slick";
+import PropTypes from "prop-types";
 
 const Testimonial3 = () => {
   const settings = {
@@ -38,6 +39,7 @@ const Testimonial3 = () => {
       </button>
     );
   }
+  Arrow.propTypes = { type: PropTypes.string, onClick: PropTypes.func };
 
   return (
     <>

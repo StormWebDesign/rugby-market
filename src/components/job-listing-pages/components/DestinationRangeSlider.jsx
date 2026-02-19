@@ -31,7 +31,7 @@ const DestinationRangeSlider = () => {
     return (
         <div className="range-slider-one">
             <InputRange
-                formatLabel={(value) => ``}
+                formatLabel={() => ""}
                 minValue={0}
                 maxValue={100}
                 value={{ min: destination.min, max: destination.max }}

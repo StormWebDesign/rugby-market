@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const Breadcrumb = ({ title = "", meta = "" }) => {
   return (
@@ -16,6 +17,11 @@ const Breadcrumb = ({ title = "", meta = "" }) => {
       </div>
     </section>
   );
+};
+
+Breadcrumb.propTypes = {
+  title: PropTypes.string,
+  meta: PropTypes.string,
 };
 
 export default Breadcrumb;

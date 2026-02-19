@@ -1,4 +1,3 @@
-import CallToActions from "../components/CallToActions";
 import Categories from "../components/Categories";
 import DatePosted from "../components/DatePosted";
 import DestinationRangeSlider from "../components/DestinationRangeSlider";

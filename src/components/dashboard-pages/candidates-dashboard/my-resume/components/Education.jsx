@@ -102,8 +102,8 @@ const Education = () => {
                       <option value="Higher National Diploma (HND)">Higher National Diploma (HND)</option>
                       <option value="Postgraduate Diplomas">Postgraduate Diplomas</option>
                       <option value="Foundation Degree">Foundation Degree</option>
-                      <option value="Bachelor's Degree (BA, BSc)">Bachelor's Degree (BA, BSc)</option>
-                      <option value="Master's Degree (MA, MSc)">Master's Degree (MA, MSc)</option>
+                      <option value="Bachelor's Degree (BA, BSc)">Bachelor&apos;s Degree (BA, BSc)</option>
+                      <option value="Master's Degree (MA, MSc)">Master&apos;s Degree (MA, MSc)</option>
                       <option value="Doctoral degrees (PhD, DPhil)">Doctoral degrees (PhD, DPhil)</option>
                       <option value="Other">Other</option>
                     </select>

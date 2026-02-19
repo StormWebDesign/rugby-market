@@ -5,8 +5,6 @@ const ImageBox = () => {
     <div className="image-box">
       <figure className="main-image" data-aos="fade-in" data-aos-delay="500">
         <img
-        
-          layout="responsive"
           src="/images/resource/banner-img-1.png"
           alt="hero image"
         />

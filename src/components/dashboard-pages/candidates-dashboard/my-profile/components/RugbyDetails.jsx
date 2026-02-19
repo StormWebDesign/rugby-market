@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { db, auth } from "@/firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import Select from "react-select";
-import Input from '@mui/material/Input';
 
 import { catPositions } from "@/data/positions";
 import { catTypes } from "@/data/rugbyTypes";

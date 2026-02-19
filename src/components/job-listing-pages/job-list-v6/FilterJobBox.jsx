@@ -5,7 +5,6 @@
 import { Link } from "react-router-dom";
 import jobs from "../../../data/job-featured";
 import ListingShowing from "../components/ListingShowing";
-import JobSelect from "../components/JobSelect";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addCategory,

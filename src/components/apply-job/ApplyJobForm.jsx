@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const ApplyJobForm = ({ formData, handleInputChange, handleApply, job }) => {
     return (
       <div className="apply-job-container">
@@ -52,5 +54,20 @@ const ApplyJobForm = ({ formData, handleInputChange, handleApply, job }) => {
     );
   };
   
-  export default ApplyJobForm;
+ApplyJobForm.propTypes = {
+  formData: PropTypes.shape({
+    fullName: PropTypes.string,
+    email: PropTypes.string,
+    phone: PropTypes.string,
+    position: PropTypes.string,
+    experience: PropTypes.string,
+  }),
+  handleInputChange: PropTypes.func,
+  handleApply: PropTypes.func,
+  job: PropTypes.shape({
+    jobTitle: PropTypes.string,
+  }),
+};
+
+export default ApplyJobForm;
   

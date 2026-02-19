@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const WidgetTopFilterBox = ({ selectedJob, setSelectedJob }) => {
   return (
     <div className="chosen-outer">
@@ -30,6 +32,11 @@ const WidgetTopFilterBox = ({ selectedJob, setSelectedJob }) => {
       </select>
     </div>
   );
+};
+
+WidgetTopFilterBox.propTypes = {
+  selectedJob: PropTypes.string,
+  setSelectedJob: PropTypes.func,
 };
 
 export default WidgetTopFilterBox;

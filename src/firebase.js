@@ -1,10 +1,10 @@
 // src/firebase.js
 import { initializeApp } from 'firebase/app';
-import { getAnalytics } from 'firebase/analytics';
+import { getAnalytics, isSupported as isAnalyticsSupported } from 'firebase/analytics';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
-import { getMessaging, onMessage, getToken } from "firebase/messaging";
+import { getMessaging, onMessage, getToken, isSupported as isMessagingSupported } from "firebase/messaging";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -18,10 +18,24 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
-const messaging = getMessaging(app);
+
+// Initialize Analytics only if supported
+let analytics = null;
+isAnalyticsSupported().then((supported) => {
+  if (supported) {
+    analytics = getAnalytics(app);
+  }
+});
+
+// Initialize Messaging only if supported
+let messaging = null;
+isMessagingSupported().then((supported) => {
+  if (supported) {
+    messaging = getMessaging(app);
+  }
+});
 
 export { app, auth, db, storage, analytics, messaging, onMessage, getToken };
