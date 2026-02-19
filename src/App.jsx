@@ -74,6 +74,7 @@ import ShopSingleDyanmic from "./pages/shop/shop-single";
 import CartPage from "./pages/shop/cart";
 import CheckoutPage from "./pages/shop/checkout";
 import OrderCompletedPage from "./pages/shop/order-completed";
+import PublicProfilePage from "./pages/public-profile";
 function App() {
   useEffect(() => {
     Aos.init({
@@ -129,6 +130,10 @@ function App() {
                   <Route path="login" element={<LoginPage />} />
                   <Route path="register" element={<RegisterPage />} />
                   <Route path="404" element={<NotFoundPage />} />
+
+                  {/* Public Profile - must be before catch-all */}
+                  <Route path=":slug" element={<PublicProfilePage />} />
+
                   <Route path="*" element={<NotFoundPage />} />
 
                   <Route path="employers-dashboard" >

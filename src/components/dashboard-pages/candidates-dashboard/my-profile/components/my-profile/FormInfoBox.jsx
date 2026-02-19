@@ -4,6 +4,7 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 import Select from "react-select";
 
 import { catGender } from "@/data/genders";
+import { generateSlug, sanitizeSlug, validateSlug, checkSlugAvailability } from "@/utils/profileSlug";
 
 const FormInfoBox = () => {
   const [formData, setFormData] = useState({
@@ -24,12 +25,15 @@ const FormInfoBox = () => {
     languages: "",
     allowSearch: "Yes",
     description: "",
+    profileSlug: "",
   });
 
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isFetching, setIsFetching] = useState(true);
+  const [slugError, setSlugError] = useState("");
+  const [slugChecking, setSlugChecking] = useState(false);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -109,6 +113,46 @@ const FormInfoBox = () => {
     }));
   };
 
+  const handleSlugChange = async (e) => {
+    const rawValue = e.target.value;
+    const sanitized = sanitizeSlug(rawValue);
+
+    setFormData((prevData) => ({ ...prevData, profileSlug: sanitized }));
+    setSlugError("");
+
+    if (!sanitized) return;
+
+    // Validate format
+    const validation = validateSlug(sanitized);
+    if (!validation.valid) {
+      setSlugError(validation.error);
+      return;
+    }
+
+    // Check availability
+    setSlugChecking(true);
+    try {
+      const user = auth.currentUser;
+      const available = await checkSlugAvailability(sanitized, user?.uid);
+      if (!available) {
+        setSlugError("This URL is already taken. Please choose a different one.");
+      }
+    } catch (error) {
+      console.error("Error checking slug:", error);
+    } finally {
+      setSlugChecking(false);
+    }
+  };
+
+  const generateDefaultSlug = () => {
+    if (formData.firstName && formData.lastName) {
+      const defaultSlug = generateSlug(formData.firstName, formData.lastName);
+      setFormData((prevData) => ({ ...prevData, profileSlug: defaultSlug }));
+      // Trigger validation
+      handleSlugChange({ target: { value: defaultSlug } });
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -120,6 +164,23 @@ const FormInfoBox = () => {
       if (!user) {
         setErrorMessage("User is not logged in.");
         return;
+      }
+
+      // Validate slug if provided
+      if (formData.profileSlug) {
+        const validation = validateSlug(formData.profileSlug);
+        if (!validation.valid) {
+          setErrorMessage(validation.error);
+          setLoading(false);
+          return;
+        }
+
+        const available = await checkSlugAvailability(formData.profileSlug, user.uid);
+        if (!available) {
+          setErrorMessage("Profile URL is already taken. Please choose a different one.");
+          setLoading(false);
+          return;
+        }
       }
 
       // Save data to Firestore
@@ -265,6 +326,39 @@ const FormInfoBox = () => {
             onChange={handleInputChange}
             required
           ></textarea>
+        </div>
+
+        {/* Profile URL */}
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Public Profile URL</label>
+          <div className="input-group">
+            <span className="input-group-text" style={{ backgroundColor: '#f5f5f5', border: '1px solid #e0e0e0', borderRight: 'none', fontSize: '14px' }}>
+              rugbytransfermarket.com/
+            </span>
+            <input
+              type="text"
+              name="profileSlug"
+              placeholder="firstname.lastname"
+              value={formData.profileSlug}
+              onChange={handleSlugChange}
+              style={{ borderLeft: 'none' }}
+            />
+          </div>
+          {!formData.profileSlug && formData.firstName && formData.lastName && (
+            <button
+              type="button"
+              className="btn btn-link p-0 mt-1"
+              onClick={generateDefaultSlug}
+              style={{ fontSize: '13px' }}
+            >
+              Generate from name
+            </button>
+          )}
+          {slugChecking && <small className="text-muted">Checking availability...</small>}
+          {slugError && <small className="text-danger">{slugError}</small>}
+          {formData.profileSlug && !slugError && !slugChecking && (
+            <small className="text-success">This URL is available</small>
+          )}
         </div>
 
         {/* Submit Button */}

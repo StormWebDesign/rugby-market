@@ -42,6 +42,14 @@ const candidateMenus = [
     active: "",
   },
   {
+    id: 15,
+    name: "View My Profile",
+    icon: "la la-external-link-alt",
+    routePath: "PUBLIC_PROFILE",
+    active: "",
+    isExternal: true,
+  },
+  {
     id: 14,
     name: "Job Search",
     icon: "la-briefcase",
