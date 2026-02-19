@@ -1,3 +1,5 @@
+import { version } from "@/data/version";
+
 const CopyrightFooter = () => {
   return (
     <div className="copyright-text">
@@ -10,7 +12,7 @@ const CopyrightFooter = () => {
         >
           Storm
         </a>
-        . All Right Reserved.
+        . All Right Reserved. | v{version[0].split(" - ")[0]}
       </p>
     </div>
   );
