@@ -28,3 +28,4 @@ yarn.lock
 .vscode/extensions.json
 rugbymarket.code-workspace
 .claude/settings.local.json
+.env
